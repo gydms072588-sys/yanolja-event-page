@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="트립 홀릭 TOPS 펜션 추천 이벤트 페이지">
+  <title>TRIP HOLIC TOPS 펜션 이벤트</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">본문 바로가기</a>
+
+  <main id="main">
+    <section id="hero" class="hero" aria-labelledby="hero-title">
+      <div class="hero-swiper swiper" aria-label="히어로 영상 슬라이드">
+        <div class="swiper-wrapper">
+          <article class="swiper-slide hero-slide">
+            <video class="hero-video" autoplay muted loop playsinline poster="./assets/images/Section3_image1.png">
+              <source src="./assets/video/TRIP HOLIC.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+            <div class="hero-copy">
+              <h1 id="hero-title">좋은 여행은<br>좋은 숙소를 고르는 순간부터</h1>
+              <p>야놀자가 추천하는 우수 펜션과 함께<br>지역 소상공인의 새로운 여행 경험을 응원합니다</p>
+            </div>
+          </article>
+        </div>
+        <div class="hero-progress" aria-hidden="true">
+          <span class="progress-label">TRIP HOLIC</span>
+          <div class="progress-track">
+            <span class="progress-fill"></span>
+          </div>
+          <span class="progress-label">REAL REVIEW</span>
+        </div>
+      </div>
+      <aside class="quick-menu" aria-label="빠른 이동 메뉴">
+        <button type="button" data-target="#section-recommend">숙소 예약</button>
+        <button type="button" data-target="#section-how">이벤트</button>
+        <button type="button" data-target="#section-schedule">당첨확인</button>
+      </aside>
+    </section>
+
+    <section id="section-recommend" class="section section-recommend" aria-labelledby="recommend-title">
+      <div class="container">
+        <div class="recommend-heading-wrap">
+          <span class="plane-trail" aria-hidden="true"></span>
+          <span class="plane-motion" aria-hidden="true"></span>
+          <p class="section-kicker">여행 스타일에 맞는 펜션을 골라보세요</p>
+          <h2 id="recommend-title">트립 홀릭 추천!<br>TOPS 펜션</h2>
+        </div>
+        <div class="recommend-layout">
+          <article class="featured-card">
+            <img src="./assets/images/main-card_image.png" alt="숲속에 있는 삼각형 목조 펜션">
+            <button class="card-hover featured-hover" type="button" aria-label="숲결 스테이 더보기" data-place="숲결 스테이">
+              <strong>더보기</strong>
+              <span>#숲속펜션 #감성숙소 #가평</span>
+              <em>숲에 둘러싸인 독채 공간에서<br>하루 종일 조용히 쉬고 싶은 분께<br>추천하는 프라이빗 힐링 스테이</em>
+            </button>
+            <div class="card-copy">
+              <strong>숲결 스테이</strong>
+              <span>가평군 북면</span>
+            </div>
+          </article>
+          <div class="gallery-grid" id="galleryGrid" aria-label="추천 펜션 목록"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="section-about" class="section section-about" aria-labelledby="about-title">
+      <img class="leaf leaf-left" src="./assets/images/left-floating-leaves.png" alt="" aria-hidden="true">
+      <img class="leaf leaf-right" src="./assets/images/right-floating-leaves.png" alt="" aria-hidden="true">
+      <div class="container about-inner">
+        <div class="about-copy">
+          <h2 id="about-title">TOPS 펜션이란?</h2>
+          <p>중소벤처기업부와 여기어때<br>우수 소상공인을<br>지원하기위해 선정된 대표 숙소입니다</p>
+        </div>
+        <div class="tops-list" id="topsList" aria-label="TOPS 인증 펜션 이미지"></div>
+      </div>
+    </section>
+
+    <section id="section-how" class="section section-how" aria-labelledby="how-title">
+      <div class="container">
+        <p class="section-kicker section-title" id="how-title">이벤트 참여방법</p>
+        <h2 class="section-description">TOPS 펜션에 방문하여<br>야놀자 스팟이 잘 드러나게 인증샷을 남겨주세요</h2>
+        <figure class="event-photo">
+          <div class="event-swiper swiper" aria-label="이벤트 참여 예시 이미지 슬라이드">
+            <div class="swiper-wrapper">
+              <article class="swiper-slide event-slide">
+                <img src="./assets/images/Section3_image1.png" alt="펜션 앞에서 가족이 함께 앉아 있는 모습">
+              </article>
+              <article class="swiper-slide event-slide">
+                <img src="./assets/images/Section3_image2.png" alt="숙소에서 인증샷을 촬영하는 예시 이미지">
+              </article>
+              <article class="swiper-slide event-slide">
+                <img src="./assets/images/Section3_image3.png" alt="이벤트 참여 인증 예시 이미지">
+              </article>
+            </div>
+
+            <button class="event-arrow event-prev" type="button" aria-label="이전 이미지"></button>
+            <button class="event-arrow event-next" type="button" aria-label="다음 이미지"></button>
+          </div>
+        </figure>
+        <ol class="step-list" id="stepList"></ol>
+      </div>
+    </section>
+
+    <section id="section-benefit" class="section section-benefit" aria-labelledby="benefit-title">
+      <div class="container">
+        <h2 id="benefit-title">좋은 펜션을 발견한 당신에게<br>여행을 더 즐겁게 만드는 선물을 드려요.</h2>
+        <div class="reward-area">
+          <img class="walk-left" src="./assets/images/left-walking-character1.png" alt="" aria-hidden="true">
+          <img class="walk-left second" src="./assets/images/left-walking-character2.png" alt="" aria-hidden="true">
+          <div class="reward-list">
+            <article class="reward-card">
+              <img src="./assets/images/reward-item1.png" alt="20퍼센트 할인 쿠폰">
+              <span>참여 혜택</span>
+            </article>
+            <article class="reward-card">
+              <img src="./assets/images/reward-item2.png" alt="커피와 롤케이크">
+              <span>추첨 혜택</span>
+            </article>
+          </div>
+          <img class="walk-right" src="./assets/images/right-walking-family.png" alt="" aria-hidden="true">
+          <img class="walk-right solo" src="./assets/images/right-walking-character.png" alt="" aria-hidden="true">
+        </div>
+      </div>
+    </section>
+
+    <section id="section-schedule" class="section section-schedule" aria-labelledby="schedule-title">
+      <div class="container">
+        <h2 id="schedule-title" class="visually-hidden">이벤트 일정</h2>
+        <p class="period-pill">이벤트 기한: <strong>2026.00.00~2026.00.00</strong></p>
+        <div class="schedule-grid">
+          <article class="schedule-card filled">
+            <img src="./assets/images/Section4_image1.png" alt="" aria-hidden="true">
+            <strong>참여기한</strong>
+            <span>2026.04.30 ~ 2026.04.29</span>
+          </article>
+          <article class="schedule-card">
+            <img src="./assets/images/Section4_image2.png" alt="" aria-hidden="true">
+            <strong>당첨자 발표</strong>
+            <span>2026.05.30</span>
+          </article>
+        </div>
+        <div class="cta-row">
+          <button class="primary-cta" type="button" id="joinEvent">이벤트 참여하기</button>
+          <button class="secondary-cta" type="button" id="checkWinner">당첨 확인</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong>고객센터</strong>
+        <p>고객행복센터 운영: 평일 09시 - 18시, 공휴일 휴무</p>
+        <p>제휴 문의 및 이벤트 관련 안내는 야놀자 여행 채널을 통해 확인해주세요.</p>
+      </div>
+      <div class="footer-form" aria-label="뉴스레터 신청">
+        <label for="email">이벤트 소식 받기</label>
+        <div>
+          <input id="email" type="email" placeholder="이메일 입력">
+          <button type="button" id="subscribe">신청</button>
+        </div>
+      </div>
+      <ul class="social-list" aria-label="소셜 채널">
+        <li><a href="#" aria-label="야놀자 블로그"></a></li>
+        <li><a href="#" aria-label="야놀자 인스타그램"></a></li>
+        <li><a href="#" aria-label="야놀자 유튜브"></a></li>
+      </ul>
+      <p class="notice">본 이벤트는 내부 사정에 따라 변경될 수 있으며, 자세한 내용은 이벤트 유의사항을 확인해주세요.</p>
+      <p class="copyright">Copyright © COMPANY Corp. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div class="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>
