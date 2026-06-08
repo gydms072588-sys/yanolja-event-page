@@ -193,13 +193,15 @@ function initEventSingleSwiper() {
 
   new Swiper(".event-swiper", {
     loop: true,
+    speed: 4200,
     slidesPerView: 1,
     centeredSlides: false,
     spaceBetween: 0,
-    grabCursor: true,
-    navigation: {
-      nextEl: ".event-next",
-      prevEl: ".event-prev",
+    grabCursor: false,
+    autoplay: {
+      delay: 0,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: false,
     },
   });
 }

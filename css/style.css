@@ -938,6 +938,10 @@ main,
   overflow: visible;
 }
 
+.event-swiper .swiper-wrapper {
+  transition-timing-function: linear;
+}
+
 .event-swiper .swiper-slide {
   width: 100%;
 }
@@ -956,6 +960,7 @@ main,
 }
 
 .event-arrow {
+  display: none;
   position: absolute;
   top: 50%;
   z-index: 5;
