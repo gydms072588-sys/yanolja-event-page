@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="트립 홀릭 TOPS 펜션 리얼 리뷰">
+  <title>REAL REVIEW | TRIP HOLIC</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body class="review-page review-list-page">
+  <a class="skip-link" href="#review-main">본문 바로가기</a>
+
+  <header class="review-hero">
+    <video class="review-hero-video" autoplay muted loop playsinline>
+      <source src="./assets/video/review/review-hero.mp4" type="video/mp4">
+    </video>
+    <div class="review-hero-overlay"></div>
+    <nav class="review-progress" aria-label="리뷰 페이지 이동">
+      <a class="progress-label" href="./index.html">TRIP HOLIC</a>
+      <span class="review-progress-track" aria-hidden="true"><span class="review-progress-fill"></span></span>
+      <span class="progress-label is-active">REAL REVIEW</span>
+    </nav>
+    <div class="review-hero-copy">
+      <h1>다녀간 사람들의<br>발자취를 따라 숙소를 골라보세요</h1>
+      <p>실제 여행자가 남긴 이야기로<br>나에게 맞는 숙소를 찾아보세요</p>
+    </div>
+  </header>
+
+  <main id="review-main" class="review-main">
+    <section class="review-section" aria-labelledby="review-list-title">
+      <div class="review-container">
+        <h2 id="review-list-title">리뷰 보기</h2>
+        <div class="review-card-list">
+          <article class="review-card">
+            <img src="./assets/images/review/review-card-01.png" alt="숙소 거울 앞에서 사진을 찍는 여행자">
+            <div class="review-card-copy">
+              <strong>@하루 의 리얼리뷰</strong>
+              <p>따뜻한 조명과 조용한 객실 덕분에 하루 종일 쉬기 좋았어요.</p>
+            </div>
+            <a class="review-booking-button" href="./index.html#section-recommend">숙소 예약하기</a>
+          </article>
+
+          <article class="review-card">
+            <img src="./assets/images/review/review-card-02.png" alt="침대 위에서 쉬고 있는 반려견">
+            <div class="review-card-copy">
+              <strong>@보리 의 리얼리뷰</strong>
+              <p>반려견과 함께 머물기 편했고 창밖 풍경이 정말 좋았습니다.</p>
+            </div>
+            <a class="review-booking-button" href="./index.html#section-recommend">숙소 예약하기</a>
+          </article>
+
+          <article class="review-card">
+            <img src="./assets/images/review/review-card-03.png" alt="목조 숙소 앞에서 웃고 있는 가족">
+            <div class="review-card-copy">
+              <strong>@소담 의 리얼리뷰</strong>
+              <p>가족 사진을 남기기 좋은 공간이 많아서 여행 기억이 오래 남았어요.</p>
+            </div>
+            <a class="review-booking-button" href="./index.html#section-recommend">숙소 예약하기</a>
+          </article>
+
+          <article class="review-card">
+            <img src="./assets/images/review/review-card-04.png" alt="숙소 안에서 물을 마시는 여행자">
+            <div class="review-card-copy">
+              <strong>@윤 의 리얼리뷰</strong>
+              <p>깔끔한 객실과 여유로운 동선 덕분에 혼자 쉬기에도 만족스러웠어요.</p>
+            </div>
+            <a class="review-booking-button" href="./index.html#section-recommend">숙소 예약하기</a>
+          </article>
+        </div>
+
+        <div class="review-bottom-cta">
+          <a href="./review-write.html">리뷰 작성하기</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const video = document.querySelector(".review-hero-video");
+      const progress = document.querySelector(".review-progress");
+      const track = document.querySelector(".review-progress-track");
+      if (!video || !progress || !track) return;
+
+      let progressCompleted = false;
+      let maxProgress = 0;
+
+      function setReviewProgress(value) {
+        track.style.setProperty("--review-progress", Math.max(0, Math.min(1, value)));
+      }
+
+      function updateReviewProgress() {
+        if (progressCompleted) return;
+
+        const duration = video.duration;
+        if (Number.isFinite(duration) && duration > 0) {
+          const value = video.currentTime / duration;
+          if (value < maxProgress && maxProgress > 0.8) {
+            progressCompleted = true;
+            setReviewProgress(1);
+            progress.classList.add("is-complete");
+            return;
+          }
+
+          maxProgress = Math.max(maxProgress, value);
+          setReviewProgress(maxProgress);
+
+          if (maxProgress >= 0.995) {
+            progressCompleted = true;
+            setReviewProgress(1);
+            progress.classList.add("is-complete");
+            return;
+          }
+        }
+
+        requestAnimationFrame(updateReviewProgress);
+      }
+
+      setReviewProgress(0);
+      updateReviewProgress();
+    })();
+  </script>
+</body>
+</html>
