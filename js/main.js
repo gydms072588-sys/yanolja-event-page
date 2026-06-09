@@ -174,6 +174,26 @@ function initAboutMotion() {
   observer.observe(aboutSection);
 }
 
+function initBenefitMotion() {
+  const benefitSection = document.querySelector("#section-benefit");
+  if (!benefitSection) return;
+
+  if (!("IntersectionObserver" in window)) {
+    benefitSection.classList.add("is-visible");
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      benefitSection.classList.add("is-visible");
+      observer.unobserve(benefitSection);
+    });
+  }, { threshold: 0.35 });
+
+  observer.observe(benefitSection);
+}
+
 function renderSteps() {
   const stepList = document.querySelector("#stepList");
   stepList.innerHTML = stepItems
@@ -193,15 +213,23 @@ function initEventSingleSwiper() {
 
   new Swiper(".event-swiper", {
     loop: true,
-    speed: 4200,
+    speed: 900,
     slidesPerView: 1,
     centeredSlides: false,
     spaceBetween: 0,
     grabCursor: false,
+    effect: "fade",
+    fadeEffect: {
+      crossFade: true,
+    },
     autoplay: {
-      delay: 0,
+      delay: 3000,
       disableOnInteraction: false,
       pauseOnMouseEnter: false,
+    },
+    pagination: {
+      el: ".event-pagination",
+      clickable: true,
     },
   });
 }
@@ -272,11 +300,11 @@ function bindInteractions() {
     showToast("당첨자 발표일은 2026.05.30입니다.");
   });
 
-  document.querySelector("#subscribe").addEventListener("click", () => {
+  document.querySelector("#subscribe")?.addEventListener("click", () => {
     const email = document.querySelector("#email");
-    if (!email.value.trim()) {
+    if (!email?.value.trim()) {
       showToast("이메일을 입력해주세요.");
-      email.focus();
+      email?.focus();
       return;
     }
     showToast("이벤트 소식 신청이 완료되었습니다.");
@@ -288,6 +316,7 @@ renderGallery();
 initRecommendMotion();
 renderTopsCards();
 initAboutMotion();
+initBenefitMotion();
 renderSteps();
 initEventSingleSwiper();
 bindInteractions();
