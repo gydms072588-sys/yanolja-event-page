@@ -141,17 +141,32 @@
           </article>
           <article class="schedule-card">
             <img src="./assets/images/Section4_image2.png" alt="" aria-hidden="true">
-            <strong>당첨자 발표</strong>
-            <span>2026.05.30</span>
+            <strong>당첨 확인하기</strong>
+            <span>2026.06.20</span>
           </article>
         </div>
         <div class="cta-row">
-          <button class="primary-cta" type="button" id="joinEvent">이벤트 참여하기</button>
-          <button class="secondary-cta" type="button" id="checkWinner">당첨 확인</button>
+          <button id="checkWinner" class="primary-cta" type="button">당첨 확인</button>
         </div>
       </div>
     </section>
   </main>
+
+  <div class="floating-actions" aria-label="빠른 상담 및 리뷰 작성">
+    <div class="floating-action-wrap">
+      <button id="floatingChat" class="floating-action-button" type="button" aria-label="고객상담 열기" aria-expanded="false" aria-controls="floatingConsultPanel">
+        <img src="./assets/images/floating/icon-floating-chat.png" alt="" aria-hidden="true">
+      </button>
+      <div id="floatingConsultPanel" class="floating-consult-panel" aria-hidden="true">
+        <strong>고객상담</strong>
+        <button type="button" data-consult-action="phone">전화 상담: 1670-6250</button>
+        <button type="button" data-consult-action="chat">채팅 상담</button>
+      </div>
+    </div>
+    <button id="floatingReview" class="floating-action-button" type="button" aria-label="리뷰작성">
+      <img src="./assets/images/floating/icon-floating-review.png" alt="" aria-hidden="true">
+    </button>
+  </div>
 
   <footer class="site-footer">
     <div class="footer-inner">

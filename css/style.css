@@ -1277,7 +1277,7 @@ main,
 }
 
 .section-schedule .cta-row {
-  display: none;
+  display: flex;
 }
 
 .primary-cta,
@@ -1815,6 +1815,102 @@ main,
   border-radius: 999px;
 }
 
+.floating-actions {
+  position: fixed;
+  right: clamp(18px, 3.2vw, 44px);
+  bottom: clamp(96px, 18vh, 180px);
+  z-index: 70;
+  display: grid;
+  gap: 12px;
+}
+
+.floating-action-wrap {
+  position: relative;
+}
+
+.floating-action-button {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  padding: 0;
+  background: var(--mint);
+  border: 0;
+  border-radius: 50%;
+  box-shadow: 0 12px 28px rgba(21, 57, 51, 0.24);
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.floating-action-button img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.floating-action-button:hover,
+.floating-action-button:focus-visible {
+  background: var(--mint-dark);
+  box-shadow: 0 16px 32px rgba(21, 57, 51, 0.3);
+  transform: translateY(-2px);
+}
+
+.floating-consult-panel {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 12px);
+  display: grid;
+  gap: 8px;
+  width: 190px;
+  padding: 14px;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid rgba(24, 190, 163, 0.22);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transform: translate(8px, -50%);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+}
+
+.floating-consult-panel.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transform: translate(0, -50%);
+}
+
+.floating-consult-panel strong {
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.floating-consult-panel a,
+.floating-consult-panel button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 12px;
+  color: var(--paper);
+  font-size: 14px;
+  font-weight: 800;
+  background: var(--mint);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.floating-consult-panel a:hover,
+.floating-consult-panel a:focus-visible,
+.floating-consult-panel button:hover,
+.floating-consult-panel button:focus-visible {
+  background: var(--mint-dark);
+}
+
 .toast {
   position: fixed;
   left: 50%;
@@ -2098,6 +2194,28 @@ main,
 
   .review-back-button {
     width: 100%;
+  }
+
+  .floating-actions {
+    right: 12px;
+    bottom: 78px;
+    gap: 10px;
+  }
+
+  .floating-action-button {
+    width: 48px;
+    height: 48px;
+  }
+
+  .floating-action-button img {
+    width: 27px;
+    height: 27px;
+  }
+
+  .floating-consult-panel {
+    right: calc(100% + 8px);
+    width: 168px;
+    padding: 12px;
   }
 
   .hero-copy h1 {

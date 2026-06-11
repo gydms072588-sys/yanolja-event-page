@@ -63,16 +63,25 @@ const stepItems = [
 ];
 
 const imagePath = "./assets/images/";
+const EVENT_END_DATE = "2026-04-29";
 const toast = document.querySelector(".toast");
 let toastTimer;
 
 function showToast(message) {
+  if (!toast) return;
   clearTimeout(toastTimer);
   toast.textContent = message;
   toast.classList.add("is-visible");
   toastTimer = setTimeout(() => {
     toast.classList.remove("is-visible");
   }, 2200);
+}
+
+function getDateString(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 }
 
 function renderGallery() {
@@ -279,6 +288,51 @@ function initSwiper() {
   updateHeroProgress();
 }
 
+function initFloatingActions() {
+  const chatButton = document.querySelector("#floatingChat");
+  const consultPanel = document.querySelector("#floatingConsultPanel");
+  const reviewButton = document.querySelector("#floatingReview");
+
+  function setConsultPanelOpen(isOpen) {
+    consultPanel?.classList.toggle("is-open", isOpen);
+    consultPanel?.setAttribute("aria-hidden", String(!isOpen));
+    chatButton?.setAttribute("aria-expanded", String(isOpen));
+    chatButton?.setAttribute("aria-label", isOpen ? "고객상담 닫기" : "고객상담 열기");
+  }
+
+  chatButton?.addEventListener("click", () => {
+    const isOpen = consultPanel?.classList.contains("is-open");
+    setConsultPanelOpen(!isOpen);
+  });
+
+  consultPanel?.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-consult-action]");
+    if (!button) return;
+
+    if (button.dataset.consultAction === "phone") {
+      showToast("전화 상담: 1670-6250");
+      return;
+    }
+
+    showToast("채팅 상담을 준비 중입니다.");
+  });
+
+  reviewButton?.addEventListener("click", () => {
+    showToast("리뷰 페이지로 이동할 예정입니다.");
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!consultPanel?.classList.contains("is-open")) return;
+    if (event.target.closest(".floating-action-wrap")) return;
+    setConsultPanelOpen(false);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    setConsultPanelOpen(false);
+  });
+}
+
 function bindInteractions() {
   document.querySelectorAll("[data-target]").forEach((button) => {
     button.addEventListener("click", () => {
@@ -286,18 +340,23 @@ function bindInteractions() {
     });
   });
 
-  document.querySelector("#section-recommend").addEventListener("click", (event) => {
+  document.querySelector("#section-recommend")?.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-place]");
     if (!button) return;
     showToast(`${button.dataset.place} 예약 화면으로 이동할 예정입니다.`);
   });
 
-  document.querySelector("#joinEvent").addEventListener("click", () => {
+  document.querySelector("#joinEvent")?.addEventListener("click", () => {
     showToast("이벤트 참여 신청이 시작됩니다.");
   });
 
-  document.querySelector("#checkWinner").addEventListener("click", () => {
-    showToast("당첨자 발표일은 2026.05.30입니다.");
+  document.querySelector("#checkWinner")?.addEventListener("click", () => {
+    const today = getDateString(new Date());
+    const message = today > EVENT_END_DATE
+      ? "종료된 이벤트입니다."
+      : "확인 페이지로 이동할 예정입니다.";
+
+    showToast(message);
   });
 
   document.querySelector("#subscribe")?.addEventListener("click", () => {
@@ -319,5 +378,6 @@ initAboutMotion();
 initBenefitMotion();
 renderSteps();
 initEventSingleSwiper();
+initFloatingActions();
 bindInteractions();
 initSwiper();
