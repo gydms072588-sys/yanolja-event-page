@@ -63,7 +63,6 @@ const stepItems = [
 ];
 
 const imagePath = "./assets/images/";
-const EVENT_END_DATE = "2026-04-29";
 const toast = document.querySelector(".toast");
 let toastTimer;
 
@@ -82,6 +81,10 @@ function getDateString(date) {
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
+}
+
+function formatDateLabel(dateString) {
+  return dateString.replace(/-/g, ".");
 }
 
 function renderGallery() {
@@ -350,11 +353,18 @@ function bindInteractions() {
     showToast("이벤트 참여 신청이 시작됩니다.");
   });
 
-  document.querySelector("#checkWinner")?.addEventListener("click", () => {
+  document.querySelector(".schedule-check-card[data-check-date]")?.addEventListener("click", (event) => {
+    const checkDate = event.currentTarget.dataset.checkDate;
     const today = getDateString(new Date());
-    const message = today > EVENT_END_DATE
-      ? "종료된 이벤트입니다."
-      : "확인 페이지로 이동할 예정입니다.";
+    let message;
+
+    if (today < checkDate) {
+      message = `당첨 확인 기간이 아닙니다. ${formatDateLabel(checkDate)} 이후 확인해주세요.`;
+    } else if (today === checkDate) {
+      message = "확인 페이지로 이동할 예정입니다.";
+    } else {
+      message = "종료된 이벤트입니다.";
+    }
 
     showToast(message);
   });

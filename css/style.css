@@ -1244,6 +1244,9 @@ main,
   min-height: 96px;
   padding: 16px 28px;
   color: var(--mint);
+  font: inherit;
+  text-align: left;
+  background: var(--paper);
   border: 3px solid var(--mint);
 }
 
@@ -1267,6 +1270,28 @@ main,
 .schedule-card span {
   font-size: 15px;
   font-weight: 900;
+}
+
+.schedule-check-card {
+  width: 100%;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.schedule-check-card:hover,
+.schedule-check-card:focus-visible {
+  color: var(--mint-dark);
+  background: var(--mint-soft);
+  box-shadow: 0 14px 30px rgba(24, 190, 163, 0.2), 0 0 0 4px rgba(24, 190, 163, 0.16);
+  outline: 0;
+  transform: translateY(-2px);
+}
+
+.schedule-check-card:hover img,
+.schedule-check-card:focus-visible img {
+  opacity: 1;
+  visibility: visible;
+  filter: none;
 }
 
 .cta-row {
