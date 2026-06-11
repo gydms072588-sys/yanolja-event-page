@@ -24,6 +24,11 @@
       <h1>다녀간 사람들의<br>발자취를 따라 숙소를 골라보세요</h1>
       <p>실제 여행자가 남긴 이야기로 나에게 맞는 숙소를 찾아보세요</p>
     </div>
+    <aside class="quick-menu" aria-label="빠른 이동 메뉴">
+      <a class="quick-link" href="./index.html#section-recommend">숙소 예약</a>
+      <a class="quick-link" href="./index.html#section-how">이벤트</a>
+      <a class="quick-link" href="./index.html">TOP 펜션</a>
+    </aside>
   </header>
 
   <main id="review-main" class="review-main">
@@ -37,7 +42,7 @@
               <strong>@하루 의 리얼리뷰</strong>
               <p>따뜻한 조명과 조용한 객실 덕분에 하루 종일 쉬기 좋았어요.</p>
             </div>
-            <a class="review-booking-button" href="./index.html#section-recommend">더보기</a>
+            <button class="review-booking-button" type="button" data-review-detail>더보기</button>
           </article>
 
           <article class="review-card">
@@ -46,7 +51,7 @@
               <strong>@보리 의 리얼리뷰</strong>
               <p>반려견과 함께 머물기 편했고 창밖 풍경이 정말 좋았습니다.</p>
             </div>
-            <a class="review-booking-button" href="./index.html#section-recommend">더보기</a>
+            <button class="review-booking-button" type="button" data-review-detail>더보기</button>
           </article>
 
           <article class="review-card">
@@ -55,7 +60,7 @@
               <strong>@소담 의 리얼리뷰</strong>
               <p>가족 사진을 남기기 좋은 공간이 많아서 여행 기억이 오래 남았어요.</p>
             </div>
-            <a class="review-booking-button" href="./index.html#section-recommend">더보기</a>
+            <button class="review-booking-button" type="button" data-review-detail>더보기</button>
           </article>
 
           <article class="review-card">
@@ -64,17 +69,21 @@
               <strong>@윤 의 리얼리뷰</strong>
               <p>깔끔한 객실과 여유로운 동선 덕분에 혼자 쉬기에도 만족스러웠어요.</p>
             </div>
-            <a class="review-booking-button" href="./index.html#section-recommend">더보기</a>
+            <button class="review-booking-button" type="button" data-review-detail>더보기</button>
           </article>
         </div>
 
         <div class="review-bottom-cta">
-          <a href="./review-write.html">리뷰 작성하기</a>
+          <button class="review-action-button" type="button" data-review-write>리뷰 작성하기</button>
+          <button class="review-action-button" type="button" data-review-more>더 많은 리뷰 보기</button>
         </div>
       </div>
     </section>
   </main>
 
+  <div class="toast" role="status" aria-live="polite"></div>
+
+  <script src="./js/main.js"></script>
   <script>
     (() => {
       const video = document.querySelector(".review-hero-video");

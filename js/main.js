@@ -89,6 +89,8 @@ function formatDateLabel(dateString) {
 
 function renderGallery() {
   const galleryGrid = document.querySelector("#galleryGrid");
+  if (!galleryGrid) return;
+
   galleryGrid.innerHTML = galleryItems
     .map((item) => `
       <article class="gallery-card">
@@ -157,6 +159,8 @@ function initRecommendMotion() {
 
 function renderTopsCards() {
   const topsList = document.querySelector("#topsList");
+  if (!topsList) return;
+
   topsList.innerHTML = topsItems
     .map((item) => `
       <article class="tops-card">
@@ -208,6 +212,8 @@ function initBenefitMotion() {
 
 function renderSteps() {
   const stepList = document.querySelector("#stepList");
+  if (!stepList) return;
+
   stepList.innerHTML = stepItems
     .map((item) => `
       <li class="step-item">
@@ -250,6 +256,8 @@ function initSwiper() {
   const heroProgress = document.querySelector(".hero-progress");
   const progressTrack = document.querySelector(".progress-track");
   const realReviewLabel = document.querySelector(".progress-label:last-child");
+  if (!heroProgress || !progressTrack) return;
+
   let isProgressComplete = false;
 
   function setHeroProgress(value) {
@@ -336,6 +344,42 @@ function initFloatingActions() {
   });
 }
 
+function initReviewCardMotion() {
+  const reviewCardList = document.querySelector(".review-card-list");
+  if (!reviewCardList) return;
+
+  if (!("IntersectionObserver" in window)) {
+    reviewCardList.classList.add("is-visible");
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      reviewCardList.classList.add("is-visible");
+      observer.unobserve(reviewCardList);
+    });
+  }, { threshold: 0.18 });
+
+  observer.observe(reviewCardList);
+}
+
+function bindReviewInteractions() {
+  document.querySelectorAll("[data-review-detail]").forEach((button) => {
+    button.addEventListener("click", () => {
+      showToast("리뷰 상세 페이지로 이동할 예정입니다.");
+    });
+  });
+
+  document.querySelector("[data-review-write]")?.addEventListener("click", () => {
+    showToast("리뷰 작성 페이지로 이동할 예정입니다.");
+  });
+
+  document.querySelector("[data-review-more]")?.addEventListener("click", () => {
+    showToast("더 많은 리뷰를 불러올 예정입니다.");
+  });
+}
+
 function bindInteractions() {
   document.querySelectorAll("[data-target]").forEach((button) => {
     button.addEventListener("click", () => {
@@ -389,5 +433,7 @@ initBenefitMotion();
 renderSteps();
 initEventSingleSwiper();
 initFloatingActions();
+initReviewCardMotion();
 bindInteractions();
+bindReviewInteractions();
 initSwiper();

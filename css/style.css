@@ -1591,6 +1591,26 @@ main,
   overflow: hidden;
   background: #eeeeee;
   border-radius: 0 28px 28px 0;
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.56s ease, transform 0.56s ease;
+}
+
+.review-card-list.is-visible .review-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.review-card-list.is-visible .review-card:nth-child(2) {
+  transition-delay: 0.08s;
+}
+
+.review-card-list.is-visible .review-card:nth-child(3) {
+  transition-delay: 0.16s;
+}
+
+.review-card-list.is-visible .review-card:nth-child(4) {
+  transition-delay: 0.24s;
 }
 
 .review-card img {
@@ -1624,8 +1644,11 @@ main,
   color: var(--mint);
   font-size: 20px;
   font-weight: 900;
+  font-family: inherit;
+  background: transparent;
   border: 3px solid var(--mint);
   border-radius: 999px;
+  cursor: pointer;
   transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
 
@@ -1638,11 +1661,15 @@ main,
 
 .review-bottom-cta {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  gap: 18px;
   margin-top: 58px;
 }
 
 .review-bottom-cta a,
+.review-action-button,
 .review-submit-button {
   display: inline-flex;
   align-items: center;
@@ -1652,6 +1679,7 @@ main,
   color: var(--paper);
   font-size: clamp(24px, 3vw, 36px);
   font-weight: 900;
+  font-family: inherit;
   background: linear-gradient(90deg, var(--mint), #42c6ad);
   border: 0;
   border-radius: 28px;
@@ -1662,6 +1690,8 @@ main,
 
 .review-bottom-cta a:hover,
 .review-bottom-cta a:focus-visible,
+.review-action-button:hover,
+.review-action-button:focus-visible,
 .review-submit-button:hover,
 .review-submit-button:focus-visible {
   box-shadow: 0 18px 36px rgba(24, 190, 163, 0.3);
@@ -2201,6 +2231,7 @@ main,
   }
 
   .review-bottom-cta a,
+  .review-action-button,
   .review-submit-button {
     width: 100%;
     min-height: 62px;
