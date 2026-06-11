@@ -1578,7 +1578,27 @@ main,
 
 .review-card-list {
   display: grid;
-  gap: 28px;
+  max-height: clamp(560px, 62vh, 700px);
+  gap: 32px;
+  padding-right: 14px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: rgba(24, 190, 163, 0.74) rgba(24, 190, 163, 0.12);
+  scrollbar-width: thin;
+}
+
+.review-card-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.review-card-list::-webkit-scrollbar-track {
+  background: rgba(24, 190, 163, 0.12);
+  border-radius: 999px;
+}
+
+.review-card-list::-webkit-scrollbar-thumb {
+  background: rgba(24, 190, 163, 0.74);
+  border-radius: 999px;
 }
 
 .review-card {
@@ -1638,13 +1658,16 @@ main,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 178px;
-  min-height: 58px;
-  padding: 0 26px;
+  flex: 0 0 178px;
+  width: 178px;
+  height: 58px;
+  padding: 0;
   color: var(--mint);
   font-size: 20px;
   font-weight: 900;
   font-family: inherit;
+  line-height: 1;
+  text-align: center;
   background: transparent;
   border: 3px solid var(--mint);
   border-radius: 999px;
@@ -1665,7 +1688,7 @@ main,
   align-items: center;
   justify-content: center;
   gap: 18px;
-  margin-top: 58px;
+  margin-top: 72px;
 }
 
 .review-bottom-cta a,
@@ -1674,12 +1697,15 @@ main,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 72px;
-  padding: 0 72px;
+  width: 360px;
+  height: 72px;
+  padding: 0;
   color: var(--paper);
   font-size: clamp(24px, 3vw, 36px);
   font-weight: 900;
   font-family: inherit;
+  line-height: 1;
+  text-align: center;
   background: linear-gradient(90deg, var(--mint), #42c6ad);
   border: 0;
   border-radius: 28px;
@@ -2073,6 +2099,12 @@ main,
     width: min(760px, calc(100% - 48px));
   }
 
+  .review-card-list {
+    max-height: none;
+    padding-right: 0;
+    overflow: visible;
+  }
+
   .review-card {
     grid-template-columns: 180px 1fr;
     gap: 22px;
@@ -2087,6 +2119,8 @@ main,
   .review-booking-button {
     grid-column: 2;
     justify-self: start;
+    width: 178px;
+    height: 48px;
     min-height: 48px;
     font-size: 17px;
   }
@@ -2228,6 +2262,7 @@ main,
     grid-column: auto;
     justify-self: stretch;
     min-width: 0;
+    width: auto;
   }
 
   .review-bottom-cta a,
