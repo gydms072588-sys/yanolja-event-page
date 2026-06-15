@@ -1697,12 +1697,12 @@ main,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 360px;
-  height: 72px;
+  width: 320px;
+  height: 58px;
   padding: 0;
   color: var(--paper);
-  font-size: clamp(24px, 3vw, 36px);
-  font-weight: 900;
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 700;
   font-family: inherit;
   line-height: 1;
   text-align: center;
@@ -2096,7 +2096,38 @@ main,
   }
 
   .review-progress {
+    top: clamp(32px, 6vh, 56px);
     width: min(760px, calc(100% - 48px));
+  }
+
+  .review-hero {
+    height: 100svh;
+    min-height: 720px;
+  }
+
+  .review-hero-copy {
+    left: 28px;
+    right: 28px;
+    bottom: 74px;
+    max-width: calc(100% - 56px);
+  }
+
+  .review-hero-copy h1 {
+    margin-bottom: 10px;
+    font-size: clamp(38px, 7vw, 58px);
+    line-height: 1.06;
+  }
+
+  .review-hero-copy p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.32;
+  }
+
+  .review-hero .quick-menu {
+    bottom: 16px;
+    width: calc(100% - 24px);
+    gap: 10px;
   }
 
   .review-card-list {
@@ -2208,7 +2239,12 @@ main,
   }
 
   .review-hero {
-    min-height: 560px;
+    height: 100svh;
+    min-height: 640px;
+  }
+
+  .review-progress {
+    top: clamp(28px, 5vh, 42px);
   }
 
   .review-progress,
@@ -2222,14 +2258,43 @@ main,
   }
 
   .review-hero-copy {
-    left: 24px;
-    right: 24px;
-    bottom: 54px;
+    left: 22px;
+    right: 22px;
+    bottom: 70px;
     max-width: none;
   }
 
-  .review-hero-copy h1 {
-    font-size: clamp(36px, 11vw, 50px);
+  .review-hero-copy h1,
+  .review-hero-copy h2 {
+    margin-bottom: 6px;
+    font-size: clamp(34px, 10vw, 46px);
+    line-height: 1.02;
+  }
+
+  .review-hero-copy p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.24;
+  }
+
+  .review-hero .quick-menu {
+    right: 10px;
+    bottom: 14px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: calc(100% - 20px);
+    gap: 6px;
+  }
+
+  .review-hero .quick-menu button,
+  .review-hero .quick-menu .quick-link {
+    min-height: 40px;
+    padding: 0 8px;
+    font-size: 13px;
+    line-height: 1.15;
+  }
+
+  .review-page .floating-actions {
+    bottom: 76px;
   }
 
   .review-section {
@@ -2269,8 +2334,8 @@ main,
   .review-action-button,
   .review-submit-button {
     width: 100%;
-    min-height: 62px;
-    padding: 0 24px;
+    min-height: 54px;
+    padding: 0 20px;
     border-radius: 22px;
   }
 
