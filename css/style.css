@@ -1559,16 +1559,19 @@ main,
 }
 
 .review-section {
-  padding: clamp(72px, 8vw, 104px) clamp(20px, 5vw, 136px) clamp(84px, 9vw, 118px);
+  width: min(1400px, calc(100% - clamp(40px, 7vw, 96px)));
+  padding: clamp(76px, 8vw, 112px) 0 clamp(92px, 9vw, 128px);
+  margin: 0 auto;
 }
 
 .review-container {
-  width: min(920px, 100%);
+  position: relative;
+  width: 100%;
   margin: 0 auto;
 }
 
 .review-section h2 {
-  margin: 0 0 44px;
+  margin: 0 0 clamp(42px, 5vw, 64px);
   color: var(--mint);
   font-size: clamp(38px, 5vw, 58px);
   font-weight: 900;
@@ -1578,42 +1581,24 @@ main,
 
 .review-card-list {
   display: grid;
-  max-height: clamp(560px, 62vh, 700px);
-  gap: 32px;
-  padding-right: 14px;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-color: rgba(24, 190, 163, 0.74) rgba(24, 190, 163, 0.12);
-  scrollbar-width: thin;
-}
-
-.review-card-list::-webkit-scrollbar {
-  width: 6px;
-}
-
-.review-card-list::-webkit-scrollbar-track {
-  background: rgba(24, 190, 163, 0.12);
-  border-radius: 999px;
-}
-
-.review-card-list::-webkit-scrollbar-thumb {
-  background: rgba(24, 190, 163, 0.74);
-  border-radius: 999px;
+  gap: clamp(24px, 3vw, 36px);
 }
 
 .review-card {
   display: grid;
-  grid-template-columns: 220px 1fr auto;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr) auto;
   align-items: center;
-  gap: 32px;
-  min-height: 168px;
-  padding: 0 28px 0 0;
+  gap: clamp(26px, 3.4vw, 48px);
+  min-height: 196px;
+  padding: 0 clamp(26px, 3vw, 42px) 0 0;
   overflow: hidden;
-  background: #eeeeee;
-  border-radius: 0 28px 28px 0;
+  background: var(--paper);
+  border: 1px solid rgba(24, 190, 163, 0.14);
+  border-radius: var(--radius);
+  box-shadow: 0 18px 36px rgba(21, 57, 51, 0.08);
   opacity: 0;
   transform: translateY(32px);
-  transition: opacity 0.56s ease, transform 0.56s ease;
+  transition: opacity 0.56s ease, transform 0.56s ease, box-shadow 0.2s ease;
 }
 
 .review-card-list.is-visible .review-card {
@@ -1621,21 +1606,38 @@ main,
   transform: translateY(0);
 }
 
+.review-card:hover {
+  box-shadow: 0 22px 42px rgba(21, 57, 51, 0.12);
+}
+
 .review-card-list.is-visible .review-card:nth-child(2) {
-  transition-delay: 0.08s;
+  transition-delay: 0.05s;
 }
 
 .review-card-list.is-visible .review-card:nth-child(3) {
-  transition-delay: 0.16s;
+  transition-delay: 0.1s;
 }
 
 .review-card-list.is-visible .review-card:nth-child(4) {
-  transition-delay: 0.24s;
+  transition-delay: 0.15s;
+}
+
+.review-card-list.is-visible .review-card:nth-child(5) {
+  transition-delay: 0.2s;
+}
+
+.review-card-list.is-visible .review-card:nth-child(6) {
+  transition-delay: 0.25s;
+}
+
+.review-card-list.is-visible .review-card:nth-child(n + 7) {
+  transition-delay: 0.3s;
 }
 
 .review-card img {
-  width: 220px;
-  height: 168px;
+  width: 100%;
+  height: 100%;
+  min-height: 196px;
   object-fit: cover;
 }
 
@@ -1650,8 +1652,10 @@ main,
 .review-card-copy p {
   margin: 14px 0 0;
   color: #1c2826;
-  font-size: 17px;
+  font-size: clamp(16px, 1.2vw, 18px);
   font-weight: 700;
+  line-height: 1.65;
+  word-break: keep-all;
 }
 
 .review-booking-button {
@@ -1682,13 +1686,19 @@ main,
   transform: translateY(-2px);
 }
 
+.review-floating-actions {
+  position: fixed;
+  top: 50%;
+  right: clamp(24px, 3vw, 48px);
+  z-index: 50;
+  transform: translateY(-50%);
+}
+
 .review-bottom-cta {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 18px;
-  margin-top: 72px;
+  margin-top: clamp(48px, 6vw, 76px);
 }
 
 .review-bottom-cta a,
@@ -1714,6 +1724,27 @@ main,
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.review-action-button--primary {
+  width: 168px;
+  height: 168px;
+  padding: 0 28px;
+  font-size: 24px;
+  line-height: 1.22;
+  word-break: keep-all;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--mint), #55d8c0);
+  box-shadow: 0 18px 36px rgba(24, 190, 163, 0.28);
+}
+
+.review-action-button--secondary {
+  width: 300px;
+  color: var(--mint-dark);
+  font-size: 20px;
+  background: rgba(24, 190, 163, 0.08);
+  border: 2px solid rgba(24, 190, 163, 0.5);
+  box-shadow: none;
+}
+
 .review-bottom-cta a:hover,
 .review-bottom-cta a:focus-visible,
 .review-action-button:hover,
@@ -1722,6 +1753,14 @@ main,
 .review-submit-button:focus-visible {
   box-shadow: 0 18px 36px rgba(24, 190, 163, 0.3);
   transform: translateY(-2px);
+}
+
+.review-action-button--secondary:hover,
+.review-action-button--secondary:focus-visible {
+  color: var(--paper);
+  background: var(--mint);
+  border-color: var(--mint);
+  box-shadow: 0 12px 24px rgba(24, 190, 163, 0.16);
 }
 
 .review-write-header {
@@ -2452,5 +2491,107 @@ main,
 
   .schedule-card {
     padding: 14px 18px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1560px) {
+  .review-container {
+    padding-right: 180px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .review-main {
+    padding-bottom: 96px;
+  }
+
+  .review-floating-actions {
+    top: auto;
+    right: 18px;
+    bottom: 18px;
+    left: 18px;
+    transform: none;
+  }
+
+  .review-action-button--primary {
+    width: 100%;
+    height: 56px;
+    padding: 0 22px;
+    font-size: 19px;
+    border-radius: 22px;
+  }
+}
+
+@media (max-width: 900px) {
+  .review-card-list {
+    gap: 24px;
+  }
+
+  .review-card {
+    grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
+    align-items: start;
+    min-height: 0;
+    padding: 0 22px 22px 0;
+  }
+
+  .review-card img {
+    width: 100%;
+    height: 100%;
+    min-height: 180px;
+  }
+
+  .review-booking-button {
+    align-self: end;
+  }
+}
+
+@media (max-width: 620px) {
+  .review-section {
+    width: calc(100% - 36px);
+    padding-inline: 0;
+    padding-bottom: 110px;
+  }
+
+  .review-card {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 0 0 22px;
+    border-radius: var(--radius);
+  }
+
+  .review-card img {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+  }
+
+  .review-card-copy,
+  .review-booking-button {
+    margin-inline: 22px;
+  }
+
+  .review-card-copy strong {
+    font-size: 22px;
+  }
+
+  .review-card-copy p {
+    font-size: 16px;
+    line-height: 1.58;
+  }
+
+  .review-booking-button {
+    grid-column: auto;
+    justify-self: stretch;
+    width: auto;
+    min-width: 0;
+  }
+
+  .review-bottom-cta {
+    margin-top: 42px;
+  }
+
+  .review-action-button--secondary {
+    width: 100%;
   }
 }
