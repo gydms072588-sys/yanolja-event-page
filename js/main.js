@@ -62,6 +62,93 @@ const stepItems = [
   },
 ];
 
+const reviewItems = [
+  {
+    image: "assets/images/reviews/review-01.jpg",
+    name: "서린",
+    title: "@서린 의 리얼리뷰",
+    content: "아이와 함께 객실에서 셀카를 남겼는데 창밖 풍경까지 예쁘게 담겼어요. 침대도 넓고 조용해서 가족 모두 편하게 쉬었습니다.",
+    alt: "객실 침대 앞에서 가족이 셀카를 찍는 모습",
+  },
+  {
+    image: "assets/images/reviews/review-02.jpg",
+    name: "수아",
+    title: "@수아 의 리얼리뷰",
+    content: "객실 안에서 찍은 거울 사진이 자연스럽게 잘 나왔어요. 따뜻한 우드 톤이라 머무는 내내 아늑하고 편안했습니다.",
+    alt: "숙소 객실에서 거울 셀카를 찍는 여행자",
+  },
+  {
+    image: "assets/images/reviews/review-03.jpg",
+    name: "나린",
+    title: "@나린 의 리얼리뷰",
+    content: "아침에 창가에 앉아 커피를 마시는데 햇살이 정말 좋았어요. 혼자 쉬러 온 여행이었는데 충분히 충전하고 돌아왔습니다.",
+    alt: "창가에 앉아 머그컵을 들고 쉬는 여행자",
+  },
+  {
+    image: "assets/images/reviews/review-04.jpg",
+    name: "보리",
+    title: "@보리 의 리얼리뷰",
+    content: "반려견과 함께 머물렀는데 침대와 객실 컨디션이 깨끗해서 안심됐어요. 아이도 낯설어하지 않고 편하게 쉬었습니다.",
+    alt: "객실 침대 위에서 반려견과 함께 쉬는 여행자",
+  },
+  {
+    image: "assets/images/reviews/review-05.jpg",
+    name: "유진",
+    title: "@유진 의 리얼리뷰",
+    content: "커플 여행으로 다녀왔는데 객실에서 같이 사진 고르는 시간도 좋았어요. 침구가 깔끔하고 창밖 풍경도 차분했습니다.",
+    alt: "침대 위에서 커플이 휴대폰을 보며 쉬는 모습",
+  },
+  {
+    image: "assets/images/reviews/review-06.jpg",
+    name: "다온",
+    title: "@다온 의 리얼리뷰",
+    content: "친구들과 거실에 모여 이야기하기 좋았습니다. 창이 커서 답답하지 않고, 숙소 분위기가 자연스러워 사진도 잘 나왔어요.",
+    alt: "숙소 거실에서 친구들이 함께 이야기하는 모습",
+  },
+  {
+    image: "assets/images/reviews/review-07.jpg",
+    name: "하늘",
+    title: "@하늘 의 리얼리뷰",
+    content: "창가 자리에서 바깥 풍경을 보며 쉬는 시간이 제일 좋았어요. 객실 안에서도 여행 온 기분이 충분히 느껴졌습니다.",
+    alt: "창밖 풍경을 바라보며 테이블에 앉은 여행자",
+  },
+  {
+    image: "assets/images/reviews/review-08.jpg",
+    name: "민호",
+    title: "@민호 의 리얼리뷰",
+    content: "혼자 조용히 쉬러 갔는데 창가 소파가 정말 편했습니다. 커피 마시며 밖을 바라보는 것만으로도 충분히 여유로웠어요.",
+    alt: "창가 소파에서 커피를 들고 쉬는 여행자",
+  },
+  {
+    image: "assets/images/reviews/review-09.jpg",
+    name: "지우",
+    title: "@지우 의 리얼리뷰",
+    content: "둘이 창밖을 보며 쉬는 시간이 오래 기억에 남을 것 같아요. 객실이 조용하고 침구도 깨끗해서 만족했습니다.",
+    alt: "침대에 앉아 창밖을 바라보는 커플",
+  },
+  {
+    image: "assets/images/reviews/review-10.jpg",
+    name: "은우",
+    title: "@은우 의 리얼리뷰",
+    content: "아이와 함께 침대에서 책을 보며 쉬었는데 공간이 넉넉해서 편했습니다. 가족 여행 숙소로 다시 오고 싶어요.",
+    alt: "객실 침대 위에서 가족이 함께 책을 보는 모습",
+  },
+  {
+    image: "assets/images/reviews/review-11.jpg",
+    name: "아린",
+    title: "@아린 의 리얼리뷰",
+    content: "커튼 사이로 들어오는 햇살이 좋아서 아침 사진을 많이 남겼어요. 방 안 분위기가 따뜻해서 하루 더 머물고 싶었습니다.",
+    alt: "침대 위에서 커튼을 열며 쉬는 여행자",
+  },
+  {
+    image: "assets/images/reviews/review-12.jpg",
+    name: "태오",
+    title: "@태오 의 리얼리뷰",
+    content: "펜션 외관 앞에서 가족사진을 남기기 좋았습니다. 나무 느낌의 숙소라 따뜻했고, 도착하자마자 여행 온 기분이 났어요.",
+    alt: "펜션 외관 앞에서 가족이 기념사진을 찍는 모습",
+  },
+];
+
 const imagePath = "./assets/images/";
 const toast = document.querySelector(".toast");
 let toastTimer;
@@ -225,6 +312,36 @@ function renderSteps() {
     .join("");
 }
 
+function getReviewImageSrc(image) {
+  if (/^(https?:)?\/\//.test(image) || image.startsWith("./") || image.startsWith("/")) {
+    return image;
+  }
+
+  return `./${image}`;
+}
+
+function renderReviewCards() {
+  const reviewCardList = document.querySelector(".review-card-list");
+  if (!reviewCardList) return;
+
+  reviewCardList.innerHTML = reviewItems
+    .map((item, index) => {
+      const fallbackImage = `./assets/images/review/review-card-${String((index % 4) + 1).padStart(2, "0")}.png`;
+
+      return `
+      <article class="review-card" data-review-name="${item.name}">
+        <img src="${getReviewImageSrc(item.image)}" alt="${item.alt}" loading="lazy" onerror="this.onerror=null;this.src='${fallbackImage}';">
+        <div class="review-card-copy">
+          <strong>${item.title}</strong>
+          <p>${item.content}</p>
+        </div>
+        <button class="review-booking-button" type="button" data-review-detail>더보기</button>
+      </article>
+    `;
+    })
+    .join("");
+}
+
 function initEventSingleSwiper() {
   const eventSwiper = document.querySelector(".event-swiper");
   if (!eventSwiper || typeof Swiper === "undefined") return;
@@ -303,12 +420,46 @@ function initFloatingActions() {
   const chatButton = document.querySelector("#floatingChat");
   const consultPanel = document.querySelector("#floatingConsultPanel");
   const reviewButton = document.querySelector("#floatingReview");
+  const chatBody = consultPanel?.querySelector("[data-chat-body]");
+  const chatForm = consultPanel?.querySelector("[data-chat-form]");
+  const chatInput = chatForm?.querySelector("input");
+  const quickReplies = {
+    "이벤트 참여방법": "TOPS 펜션에 방문해 인증샷을 촬영한 뒤, 이벤트 페이지에서 리뷰와 함께 업로드하면 참여가 완료됩니다.",
+    "리뷰 작성하기": "리뷰 참여하기 버튼을 눌러 리뷰 작성 화면으로 이동할 예정입니다.",
+    "당첨자 발표": "당첨자 발표 일정은 이벤트 페이지 공지 영역에서 확인할 수 있도록 준비 중입니다.",
+    "고객센터 연결": "고객행복센터 전화 상담은 1670-6250, 채팅 상담은 추후 정식 연결될 예정입니다.",
+  };
+
+  function scrollChatToBottom() {
+    if (!chatBody) return;
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  function appendChatMessage(message, type = "bot") {
+    if (!chatBody) return;
+
+    const bubble = document.createElement("div");
+    bubble.className = `chat-message chat-message--${type}`;
+    bubble.textContent = message;
+    chatBody.appendChild(bubble);
+    scrollChatToBottom();
+  }
+
+  function appendBotResponse(message) {
+    window.setTimeout(() => {
+      appendChatMessage(message);
+    }, 500);
+  }
 
   function setConsultPanelOpen(isOpen) {
     consultPanel?.classList.toggle("is-open", isOpen);
     consultPanel?.setAttribute("aria-hidden", String(!isOpen));
     chatButton?.setAttribute("aria-expanded", String(isOpen));
     chatButton?.setAttribute("aria-label", isOpen ? "고객상담 닫기" : "고객상담 열기");
+
+    if (isOpen) {
+      window.setTimeout(scrollChatToBottom, 120);
+    }
   }
 
   chatButton?.addEventListener("click", () => {
@@ -317,19 +468,47 @@ function initFloatingActions() {
   });
 
   consultPanel?.addEventListener("click", (event) => {
-    const button = event.target.closest("[data-consult-action]");
-    if (!button) return;
-
-    if (button.dataset.consultAction === "phone") {
-      showToast("전화 상담: 1670-6250");
+    const closeButton = event.target.closest("[data-chat-close]");
+    if (closeButton) {
+      setConsultPanelOpen(false);
       return;
     }
 
-    showToast("채팅 상담을 준비 중입니다.");
+    const eventCard = event.target.closest("[data-chat-event-card]");
+    if (eventCard) {
+      const eventSection = document.querySelector("#section-how");
+      if (eventSection) {
+        eventSection.scrollIntoView({ behavior: "smooth" });
+        setConsultPanelOpen(false);
+      } else {
+        showToast("이벤트 참여방법으로 이동할 예정입니다.");
+      }
+      return;
+    }
+
+    const quickButton = event.target.closest("[data-chat-quick]");
+    if (!quickButton) return;
+
+    const selectedMessage = quickButton.dataset.chatQuick;
+    appendChatMessage(selectedMessage, "user");
+    appendBotResponse(quickReplies[selectedMessage] || quickReplies["고객센터 연결"]);
+  });
+
+  chatForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const message = chatInput?.value.trim();
+    if (!message) {
+      chatInput?.focus();
+      return;
+    }
+
+    appendChatMessage(message, "user");
+    chatInput.value = "";
+    appendBotResponse("문의 감사합니다. 현재는 이벤트 안내용 상담창이며, 실제 상담 연결은 추후 제공될 예정입니다.");
   });
 
   reviewButton?.addEventListener("click", () => {
-    showToast("리뷰 페이지로 이동할 예정입니다.");
+    showToast("리뷰 작성 페이지로 이동할 예정입니다.");
   });
 
   document.addEventListener("click", (event) => {
@@ -348,23 +527,45 @@ function initReviewCardMotion() {
   const reviewCardList = document.querySelector(".review-card-list");
   if (!reviewCardList) return;
 
+  const reviewCards = [...reviewCardList.querySelectorAll(".review-card")];
+  if (!reviewCards.length) return;
+
   if (!("IntersectionObserver" in window)) {
-    reviewCardList.classList.add("is-visible");
+    reviewCards.forEach((card) => {
+      card.classList.add("is-visible");
+    });
     return;
   }
 
-  const observer = new IntersectionObserver((entries) => {
+  const observer = new IntersectionObserver((entries, cardObserver) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
-      reviewCardList.classList.add("is-visible");
-      observer.unobserve(reviewCardList);
-    });
-  }, { threshold: 0.18 });
 
-  observer.observe(reviewCardList);
+      entry.target.classList.add("is-visible");
+      cardObserver.unobserve(entry.target);
+    });
+  }, {
+    rootMargin: "0px 0px -8% 0px",
+    threshold: 0.2
+  });
+
+  reviewCards.forEach((card, index) => {
+    const delay = index < 5 ? index * 110 : 0;
+    card.style.setProperty("--review-card-delay", `${delay}ms`);
+    observer.observe(card);
+  });
 }
 
 function bindReviewInteractions() {
+  const reviewMoreModal = document.querySelector("[data-review-more-modal]");
+  const reviewMoreCloseButtons = document.querySelectorAll("[data-review-more-close]");
+
+  function setReviewMoreModalOpen(isOpen) {
+    if (!reviewMoreModal) return;
+    reviewMoreModal.classList.toggle("is-open", isOpen);
+    reviewMoreModal.setAttribute("aria-hidden", String(!isOpen));
+  }
+
   document.querySelectorAll("[data-review-detail]").forEach((button) => {
     button.addEventListener("click", () => {
       showToast("리뷰 상세 페이지로 이동할 예정입니다.");
@@ -376,7 +577,23 @@ function bindReviewInteractions() {
   });
 
   document.querySelector("[data-review-more]")?.addEventListener("click", () => {
-    showToast("더 많은 리뷰를 불러올 예정입니다.");
+    if (!reviewMoreModal) {
+      showToast("리뷰 모음 페이지로 이동할 예정입니다.");
+      return;
+    }
+
+    setReviewMoreModalOpen(true);
+  });
+
+  reviewMoreCloseButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      setReviewMoreModalOpen(false);
+    });
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    setReviewMoreModalOpen(false);
   });
 }
 
@@ -431,6 +648,7 @@ renderTopsCards();
 initAboutMotion();
 initBenefitMotion();
 renderSteps();
+renderReviewCards();
 initEventSingleSwiper();
 initFloatingActions();
 initReviewCardMotion();

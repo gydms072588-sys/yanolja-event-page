@@ -152,17 +152,45 @@
   <div class="floating-actions" aria-label="빠른 상담 및 리뷰 작성">
     <div class="floating-action-wrap">
       <button id="floatingChat" class="floating-action-button" type="button" aria-label="고객상담 열기" aria-expanded="false" aria-controls="floatingConsultPanel">
-        <img src="./assets/images/floating/icon-floating-chat.png" alt="" aria-hidden="true">
+        <img src="./assets/images/floating/icon-floating-review.png" alt="" aria-hidden="true">
+        <span class="floating-action-tooltip" role="tooltip">고객상담</span>
       </button>
-      <div id="floatingConsultPanel" class="floating-consult-panel" aria-hidden="true">
-        <strong>고객상담</strong>
-        <button type="button" data-consult-action="phone">전화 상담: 1670-6250</button>
-        <button type="button" data-consult-action="chat">채팅 상담</button>
+      <div id="floatingConsultPanel" class="floating-consult-panel floating-chat chat-window" role="dialog" aria-modal="false" aria-labelledby="floatingChatTitle" aria-hidden="true">
+        <div class="chat-header">
+          <div>
+            <strong id="floatingChatTitle">TRIP HOLIC 고객상담</strong>
+            <span>이벤트 문의</span>
+          </div>
+          <button class="chat-close" type="button" aria-label="상담창 닫기" data-chat-close>×</button>
+        </div>
+        <div class="chat-body" data-chat-body>
+          <span class="chat-date-chip">6. 20. (토)</span>
+          <div class="chat-message chat-message--bot">안녕하세요! TRIP HOLIC 이벤트 상담입니다.</div>
+          <div class="chat-message chat-message--bot">무엇이 궁금하세요?</div>
+          <button class="chat-event-card" type="button" data-chat-event-card>
+            <strong>TOPS 펜션 인증샷 이벤트</strong>
+            <span>펜션 방문 후 인증샷과 리뷰를 남기면 참여 완료!</span>
+            <em>이벤트 참여방법 보기</em>
+          </button>
+          <div class="chat-quick-actions" aria-label="빠른 문의">
+            <button type="button" data-chat-quick="이벤트 참여방법">이벤트 참여방법</button>
+            <button type="button" data-chat-quick="리뷰 작성하기">리뷰 작성하기</button>
+            <button type="button" data-chat-quick="당첨자 발표">당첨자 발표</button>
+            <button type="button" data-chat-quick="고객센터 연결">고객센터 연결</button>
+          </div>
+        </div>
+        <form class="chat-input-row" data-chat-form>
+          <input type="text" name="message" placeholder="메시지를 입력하세요." aria-label="상담 메시지 입력" autocomplete="off">
+          <button type="submit" aria-label="메시지 보내기">보내기</button>
+        </form>
       </div>
     </div>
-    <button id="floatingReview" class="floating-action-button" type="button" aria-label="리뷰작성">
-      <img src="./assets/images/floating/icon-floating-review.png" alt="" aria-hidden="true">
-    </button>
+    <div class="floating-action-wrap">
+      <button id="floatingReview" class="floating-action-button" type="button" aria-label="리뷰 참여하기">
+        <img src="./assets/images/floating/icon-floating-chat.png" alt="" aria-hidden="true">
+        <span class="floating-action-tooltip" role="tooltip">리뷰 참여하기</span>
+      </button>
+    </div>
   </div>
 
   <footer class="site-footer">
