@@ -598,9 +598,34 @@ function bindReviewInteractions() {
 }
 
 function bindInteractions() {
+  function getWinnerCheckMessage(checkDate) {
+    const today = getDateString(new Date());
+
+    if (today < checkDate) {
+      return `당첨 확인 기간이 아닙니다. ${formatDateLabel(checkDate)} 이후 확인해주세요.`;
+    }
+
+    if (today === checkDate) {
+      return "확인 페이지로 이동할 예정입니다.";
+    }
+
+    return "종료된 이벤트입니다.";
+  }
+
   document.querySelectorAll("[data-target]").forEach((button) => {
     button.addEventListener("click", () => {
       document.querySelector(button.dataset.target)?.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
+  document.querySelectorAll("[data-check-trigger]").forEach((button) => {
+    button.addEventListener("click", () => {
+      document.querySelector("#section-schedule")?.scrollIntoView({ behavior: "smooth" });
+
+      const checkDate = document.querySelector(".schedule-check-card[data-check-date]")?.dataset.checkDate;
+      if (checkDate) {
+        showToast(getWinnerCheckMessage(checkDate));
+      }
     });
   });
 
@@ -616,18 +641,7 @@ function bindInteractions() {
 
   document.querySelector(".schedule-check-card[data-check-date]")?.addEventListener("click", (event) => {
     const checkDate = event.currentTarget.dataset.checkDate;
-    const today = getDateString(new Date());
-    let message;
-
-    if (today < checkDate) {
-      message = `당첨 확인 기간이 아닙니다. ${formatDateLabel(checkDate)} 이후 확인해주세요.`;
-    } else if (today === checkDate) {
-      message = "확인 페이지로 이동할 예정입니다.";
-    } else {
-      message = "종료된 이벤트입니다.";
-    }
-
-    showToast(message);
+    showToast(getWinnerCheckMessage(checkDate));
   });
 
   document.querySelector("#subscribe")?.addEventListener("click", () => {
