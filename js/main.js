@@ -377,6 +377,84 @@ function initReviewHeroTransition() {
   window.addEventListener("resize", requestTransitionUpdate, { passive: true });
 }
 
+function initScrollSnapTransitions() {
+  const snapContainers = document.querySelectorAll("[data-snap-transition]");
+  if (!snapContainers.length) return;
+
+  function revealSnapTarget(target) {
+    if (!target || target.classList.contains("seen")) return;
+
+    target.classList.add("seen");
+
+    const recommendSection = target.querySelector(".section-recommend");
+    recommendSection?.classList.add("is-visible");
+
+    const reviewSection = target.querySelector(".review-section");
+    if (reviewSection) {
+      reviewSection.classList.add("is-visible");
+      reviewSection.querySelectorAll(".review-card").forEach((card, index) => {
+        card.style.setProperty("--review-card-delay", `${160 + (index < 5 ? index * 50 : 0)}ms`);
+        card.classList.add("is-visible");
+      });
+    }
+  }
+
+  snapContainers.forEach((container) => {
+    const snapTargets = [...container.querySelectorAll(":scope > [data-snap-section]")];
+    if (!snapTargets.length) return;
+
+    revealSnapTarget(snapTargets[0]);
+
+    if ("onscrollsnapchange" in container) {
+      container.addEventListener("scrollsnapchange", (event) => {
+        revealSnapTarget(event.snapTargetBlock);
+      });
+      return;
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      snapTargets.forEach(revealSnapTarget);
+      return;
+    }
+
+    const observedTargetMap = new Map();
+    snapTargets.slice(1).forEach((snapTarget) => {
+      const observedElement = snapTarget.querySelector(".section-recommend, .review-section") || snapTarget;
+      observedTargetMap.set(observedElement, snapTarget);
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+          revealSnapTarget(observedTargetMap.get(entry.target));
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: container,
+      threshold: [0, 0.5, 1],
+    });
+
+    observedTargetMap.forEach((snapTarget, observedElement) => {
+      observer.observe(observedElement);
+    });
+  });
+}
+
+function initHeroScrollGuides() {
+  document.querySelectorAll("[data-scroll-guide]").forEach((guide) => {
+    guide.addEventListener("click", () => {
+      const targetSelector = guide.dataset.scrollGuide;
+      if (!targetSelector) return;
+
+      document.querySelector(targetSelector)?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+  });
+}
+
 function renderTopsCards() {
   const topsList = document.querySelector("#topsList");
   if (!topsList) return;
@@ -974,15 +1052,14 @@ function bindInteractions() {
 
 renderGallery();
 initRecommendMotion();
-initHeroRecommendTransition();
-initReviewHeroTransition();
+initScrollSnapTransitions();
+initHeroScrollGuides();
 renderTopsCards();
 initAboutMotion();
 initBenefitMotion();
 renderSteps();
 renderReviewCards();
 initReviewFilters();
-initReviewSectionMotion();
 initEventSingleSwiper();
 initFloatingActions();
 initReviewCardMotion();

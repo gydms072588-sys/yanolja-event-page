@@ -13,8 +13,8 @@
   <a class="skip-link" href="#main">본문 바로가기</a>
 
   <main id="main">
-    <div class="hero-recommend-transition">
-    <section id="hero" class="hero" aria-labelledby="hero-title">
+    <div class="hero-recommend-transition" data-snap-transition>
+    <section id="hero" class="hero" aria-labelledby="hero-title" data-snap-section>
       <div class="hero-swiper swiper" aria-label="히어로 영상 슬라이드">
         <div class="swiper-wrapper">
           <article class="swiper-slide hero-slide">
@@ -41,9 +41,21 @@
         <button type="button" data-target="#section-how">이벤트 참여</button>
         <button type="button" data-check-trigger>당첨확인</button>
       </aside>
+      <button
+        class="hero-scroll-guide"
+        type="button"
+        data-scroll-guide="#section-recommend"
+        aria-label="TOPS 추천 섹션으로 이동"
+      >
+        <span class="hero-scroll-guide__mouse" aria-hidden="true">
+          <span class="hero-scroll-guide__dot"></span>
+        </span>
+        <span class="hero-scroll-guide__arrow" aria-hidden="true"></span>
+        <span class="hero-scroll-guide__label">Scroll</span>
+      </button>
     </section>
 
-    <div class="hero-recommend-panel">
+    <div class="hero-recommend-panel" data-snap-section>
     <section id="section-recommend" class="section section-recommend" aria-labelledby="recommend-title">
       <div class="container">
         <div class="recommend-heading-wrap">

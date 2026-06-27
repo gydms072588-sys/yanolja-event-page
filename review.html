@@ -10,8 +10,8 @@
 <body class="review-page review-list-page">
   <a class="skip-link" href="#review-main">본문 바로가기</a>
 
-  <div class="review-hero-transition">
-  <header class="review-hero">
+  <div class="review-hero-transition" data-snap-transition>
+  <header class="review-hero" data-snap-section>
     <video class="review-hero-video" autoplay muted loop playsinline>
       <source src="./assets/video/review/review-hero.mp4" type="video/mp4">
     </video>
@@ -30,9 +30,21 @@
       <a class="quick-link" href="./index.html#section-recommend">TOPs 펜션</a>
       <a class="quick-link" href="./index.html#section-schedule">당첨확인</a>
     </aside>
+    <button
+      class="hero-scroll-guide"
+      type="button"
+      data-scroll-guide="#review-main"
+      aria-label="BEST REAL REVIEW 섹션으로 이동"
+    >
+      <span class="hero-scroll-guide__mouse" aria-hidden="true">
+        <span class="hero-scroll-guide__dot"></span>
+      </span>
+      <span class="hero-scroll-guide__arrow" aria-hidden="true"></span>
+      <span class="hero-scroll-guide__label">Scroll</span>
+    </button>
   </header>
 
-  <div class="review-content-panel">
+  <div class="review-content-panel" data-snap-section>
   <main id="review-main" class="review-main">
     <section class="review-section" aria-labelledby="review-list-title">
       <div class="review-container">
