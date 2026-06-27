@@ -311,6 +311,72 @@ function initHeroRecommendTransition() {
   window.addEventListener("resize", requestTransitionUpdate, { passive: true });
 }
 
+function initReviewHeroTransition() {
+  const reviewHero = document.querySelector(".review-hero-transition > .review-hero");
+  const reviewPanel = document.querySelector(".review-content-panel");
+  if (!reviewHero || !reviewPanel) return;
+
+  let frameId = 0;
+  let currentStrength = 0;
+  let targetStrength = 0;
+
+  function applyTransitionStrength(strength) {
+    const isMobile = window.matchMedia("(max-width: 620px)").matches;
+    const blur = strength * (isMobile ? 9 : 16);
+    const panelOpacity = 1 - strength * (isMobile ? 0.38 : 0.45);
+    const panelRadius = strength * (isMobile ? 22 : 34);
+    const shadowOpacity = strength * (isMobile ? 0.07 : 0.11);
+
+    reviewPanel.style.setProperty("--review-panel-blur", `${blur.toFixed(2)}px`);
+    reviewPanel.style.setProperty("--review-panel-opacity", panelOpacity.toFixed(4));
+    reviewPanel.style.setProperty("--review-panel-radius", `${panelRadius.toFixed(2)}px`);
+    reviewPanel.style.setProperty("--review-panel-shadow", shadowOpacity.toFixed(4));
+  }
+
+  function getTransitionStrength() {
+    const rect = reviewPanel.getBoundingClientRect();
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    const isMobile = window.matchMedia("(max-width: 620px)").matches;
+    const transitionStart = viewportHeight * 0.96;
+    const transitionEnd = viewportHeight * (isMobile ? 0.22 : 0.12);
+    const strength = (rect.top - transitionEnd) / (transitionStart - transitionEnd);
+
+    return Math.min(1, Math.max(0, strength));
+  }
+
+  function updateTransition() {
+    targetStrength = getTransitionStrength();
+    currentStrength += (targetStrength - currentStrength) * 0.2;
+
+    if (Math.abs(targetStrength - currentStrength) < 0.001) {
+      currentStrength = targetStrength;
+    }
+
+    applyTransitionStrength(currentStrength);
+
+    if (currentStrength !== targetStrength) {
+      frameId = window.requestAnimationFrame(updateTransition);
+      return;
+    }
+
+    frameId = 0;
+  }
+
+  function requestTransitionUpdate() {
+    targetStrength = getTransitionStrength();
+    if (!frameId) {
+      frameId = window.requestAnimationFrame(updateTransition);
+    }
+  }
+
+  currentStrength = getTransitionStrength();
+  targetStrength = currentStrength;
+  applyTransitionStrength(currentStrength);
+
+  window.addEventListener("scroll", requestTransitionUpdate, { passive: true });
+  window.addEventListener("resize", requestTransitionUpdate, { passive: true });
+}
+
 function renderTopsCards() {
   const topsList = document.querySelector("#topsList");
   if (!topsList) return;
@@ -387,26 +453,168 @@ function getReviewImageSrc(image) {
   return `./${image}`;
 }
 
-function renderReviewCards() {
+const reviewCategoryData = {
+  tops: {
+    names: ["서윤", "민서", "지안", "다온", "하린"],
+    images: [0, 4, 8, 2, 11],
+    tags: ["#30대 #TOPS펜션 #강릉", "#20대 #대표숙소 #가평", "#40대 #인증펜션 #양평", "#30대 #TOPS인증 #경주", "#20대 #우수숙소 #홍천"],
+    contents: [
+      "TOPS 인증마크를 보고 선택했는데 객실 관리와 응대가 정말 깔끔했어요. 대표 숙소답게 시설도 편안해 다시 방문하고 싶어요.",
+      "사진보다 공간이 넓고 스태프 안내도 친절해 체크인부터 편했어요. 지역의 매력을 잘 느낄 수 있는 믿을 만한 펜션이었습니다.",
+      "가족과 함께 머물렀는데 침구와 주방 모두 깔끔해 안심했어요. TOPS 펜션으로 선정된 이유를 직접 느낄 수 있었어요.",
+      "조용한 위치와 세심한 서비스 덕분에 여행 내내 편안했어요. 인증된 숙소라 기대했던 만큼 전체적인 만족도가 높았습니다.",
+      "건물과 정원이 잘 관리되어 어디서 사진을 찍어도 예쁘게 나왔어요. 우수 숙소라는 이름에 잘 어울리는 기분 좋은 스테이였어요.",
+    ],
+  },
+  couple: {
+    names: ["수아", "준호", "나연", "민준", "예린"],
+    images: [1, 8, 4, 6, 10],
+    tags: ["#20대 #커플여행 #강릉", "#30대 #기념일 #가평", "#20대 #감성숙소 #경주", "#30대 #커플스테이 #양양", "#20대 #데이트여행 #홍천"],
+    contents: [
+      "통창 앞에서 둘이 커피를 마시며 보낸 시간이 정말 좋았어요. 객실 조명과 우드 톤이 따뜻해 커플 사진도 예쁘게 나왔어요.",
+      "기념일 여행으로 방문했는데 조용하고 프라이빗해 둘만의 시간을 보내기 좋았어요. 침구도 폭신해 다음 날까지 푹 쉬었습니다.",
+      "고즈넉한 분위기와 아늑한 객실이 커플 여행과 잘 어울렸어요. 근처 산책길까지 함께 즐기며 좋은 추억을 만들었어요.",
+      "창밖 풍경을 보며 아침을 먹는 시간이 여행 중 가장 기억에 남아요. 공간이 스타일리시하고 깔끔해 서로 만족했습니다.",
+      "독채라 눈치 보지 않고 쉬며 오랜만에 많은 이야기를 나눴어요. 바빠서 미뤄둘 커플 여행지로 정말 좋은 선택이었어요.",
+    ],
+  },
+  family: {
+    names: ["보리", "지우", "은우", "서준", "유나"],
+    images: [3, 9, 0, 5, 11],
+    tags: ["#40대 #가족여행 #가평", "#30대 #아이와함께 #양평", "#40대 #가족펜션 #강릉", "#30대 #3대여행 #홍천", "#30대 #가족휴식 #경주"],
+    contents: [
+      "아이와 함께 머물기에 객실이 넓고 안전해 마음이 놓였어요. 주방 도구도 잘 갖춰져 있어 가족 식사를 준비하기 편했습니다.",
+      "아이들이 뛰어놀 공간이 충분하고 주변이 조용해 온 가족이 편히 쉬었어요. 어른들도 풍경을 보며 여유를 즐길 수 있었어요.",
+      "부모님과 함께한 여행이었는데 동선이 편하고 침대가 넉넉해 모두 만족했어요. 근처 볼거리도 많아 일정을 짜기 좋았습니다.",
+      "세대가 함께 머물러도 답답하지 않을 만큼 공간이 넓었어요. 거실에 모여 이야기하며 오랜만에 여유로운 밤을 보냈습니다.",
+      "청결 상태가 좋고 아이용 비품도 잘 준비되어 가족 여행이 한결 수월했어요. 다음 방학에도 다시 오고 싶은 편안한 숙소였어요.",
+    ],
+  },
+  friends: {
+    names: ["다온", "현우", "예진", "소민", "태오"],
+    images: [5, 2, 7, 10, 11],
+    tags: ["#20대 #친구여행 #가평", "#30대 #우정여행 #강릉", "#20대 #단체여행 #홍천", "#30대 #친구모임 #양양", "#20대 #추억여행 #경주"],
+    contents: [
+      "친구들과 거실에 모여 늦은 시간까지 이야기하기 좋았어요. 방이 여러 개라 서로 편하게 쉬며 즐거운 여행을 보냈어요.",
+      "바비큐를 하고 보드게임을 즐기며 예정보다 더 길게 숙소에 머물렀어요. 공용 공간이 넓어 여러 명이 함께하기 좋았습니다.",
+      "사진 찍을 곳이 많고 조명이 예뻐 친구들 모두 만족했어요. 재방문해서 다른 계절의 풍경도 함께 보고 싶어요.",
+      "주변 소음 없이 우리끼리 시간을 보낼 수 있어 친구 모임에 잘 어울렸어요. 침구와 욕실도 깔끔해 모두 편하게 쉬었습니다.",
+      "오랜 친구들과 오랜만에 떠난 여행이었는데 공간이 아늑해 더 즐거웠어요. 아침에 함께 차를 마시며 본 풍경도 오래 기억날 것 같아요.",
+    ],
+  },
+  ocean: {
+    names: ["하늘", "민호", "아린", "수빈", "준서"],
+    images: [6, 7, 1, 8, 4],
+    tags: ["#30대 #오션뷰 #강릉", "#20대 #바다여행 #양양", "#30대 #일출숙소 #속초", "#20대 #해변여행 #부산", "#40대 #바다휴식 #거제"],
+    contents: [
+      "창가에서 바다가 한눈에 보여 객실에 있는 내내 여행 기분이 났어요. 일출 시간에 붉게 물든 풍경은 정말 잊지 못할 것 같아요.",
+      "파도 소리를 들으며 커피를 마시는 아침이 평소보다 훨씬 여유로웠어요. 해변까지 가까워 산책하고 돌아오기도 편했습니다.",
+      "커튼을 열자마자 보이는 넓은 바다 덕분에 아침부터 기분이 좋았어요. 객실이 깔끔하고 창가 자리가 편해 오래 머물렀어요.",
+      "낮에는 푸른 바다, 밤에는 조용한 야경을 볼 수 있어 하루 종일 즐거웠어요. 오션뷰 숙소를 찾는다면 자신 있게 추천하고 싶어요.",
+      "넓은 테라스에서 바다를 보며 식사한 시간이 가장 좋았어요. 시야를 가리는 것이 없어 보는 것만으로도 충분히 힐링됐습니다.",
+    ],
+  },
+  hanok: {
+    names: ["나린", "서현", "예원", "지민", "도윤"],
+    images: [2, 11, 3, 9, 0],
+    tags: ["#30대 #한옥스테이 #경주", "#20대 #한옥감성 #전주", "#40대 #고택여행 #안동", "#30대 #전통숙소 #공주", "#20대 #한옥여행 #서울"],
+    contents: [
+      "나무 향과 한지 조명이 어우러진 공간이 아늑해 들어서자마자 마음이 편했어요. 마루에 앉아 차를 마시며 한옥의 매력을 충분히 느꼈습니다.",
+      "전통적인 외관과 편리한 실내 시설이 잘 조화되어 편안하게 머물렀어요. 고즈넉한 골목을 산책하기도 좋아 여행이 더 풍성했어요.",
+      "고택의 깊은 맛은 살리면서 욕실과 침구는 현대적이라 불편함이 없었어요. 조용한 아침 마루에서 보낸 시간이 오래 기억에 남아요.",
+      "기와지붕과 작은 마당이 아기자기해 사진을 찍는 즐거움이 있었어요. 밤에는 마을이 조용해 푹 쉬며 한옥의 운치를 즐겼습니다.",
+      "도심 가까이에서도 한옥의 차분한 분위기를 느낄 수 있어 색달했어요. 따뜻한 온돌방과 깔끔한 침구 덕분에 편안하게 쉬었어요.",
+    ],
+  },
+  hotel: {
+    names: ["민지", "유진", "시우", "혜원", "건우"],
+    images: [7, 4, 1, 10, 6],
+    tags: ["#30대 #호캉스 #서울", "#20대 #휴식여행 #인천", "#40대 #편안한숙소 #부산", "#30대 #풀코스휴식 #제주", "#20대 #도심힐링 #수원"],
+    contents: [
+      "체크인한 뒤 숙소 밖을 나가지 않고도 충분히 힐링할 수 있었어요. 폭신한 침대와 넓은 욕조 덕분에 진짜 휴식을 느꼈습니다.",
+      "룸서비스로 저녁을 먹고 느긋하게 영화를 보며 쉬었어요. 어디로 이동하지 않아도 하루가 채워지는 편안한 호캉스였어요.",
+      "수영장과 라운지를 이용하고 객실에서 푹 쉬니 짧은 일정이어도 충분했어요. 서비스가 세심하고 침구도 편해 만족스러웠습니다.",
+      "아침 식사부터 저녁 스파까지 숙소 안에서 모든 일정을 즐길 수 있었어요. 복잡한 생각 없이 편하게 쉬고 싶을 때 다시 찾고 싶어요.",
+      "도심 야경을 보며 침대에서 느긋하게 보낸 시간이 정말 좋았어요. 교통이 편하고 주변 시설도 많아 짧은 휴식에 잘 어울렸습니다.",
+    ],
+  },
+};
+
+function getReviewCategoryItems(filterName) {
+  const categoryNames = filterName === "all" ? Object.keys(reviewCategoryData) : [filterName];
+
+  return categoryNames.flatMap((categoryName) => {
+    const category = reviewCategoryData[categoryName];
+    if (!category) return [];
+
+    return category.names.map((name, index) => {
+      const sourceReview = reviewItems[category.images[index] % reviewItems.length];
+      return {
+        name,
+        image: sourceReview.image,
+        alt: sourceReview.alt,
+        content: category.contents[index],
+        tags: category.tags[index],
+        category: categoryName,
+      };
+    });
+  });
+}
+
+function renderReviewCards(filterName = "tops") {
   const reviewCardList = document.querySelector(".review-card-list");
   if (!reviewCardList) return;
 
-  reviewCardList.innerHTML = reviewItems
+  const visibleItems = document.body.classList.contains("review-list-page")
+    ? getReviewCategoryItems(filterName)
+    : reviewItems;
+
+  reviewCardList.innerHTML = visibleItems
     .map((item, index) => {
       const fallbackImage = `./assets/images/review/review-card-${String((index % 4) + 1).padStart(2, "0")}.png`;
 
       return `
-      <article class="review-card" data-review-name="${item.name}">
+      <article class="review-card" data-review-name="${item.name}" data-review-category="${item.category || "all"}">
         <img src="${getReviewImageSrc(item.image)}" alt="${item.alt}" loading="lazy" onerror="this.onerror=null;this.src='${fallbackImage}';">
         <div class="review-card-copy">
-          <strong>${item.title}</strong>
+          <strong>${item.name}님의 리뷰**</strong>
           <p>${item.content}</p>
+          ${item.tags ? `<span class="review-card-tags">${item.tags}</span>` : ""}
         </div>
-        <button class="review-booking-button" type="button" data-review-detail>더보기</button>
+        <button class="review-booking-button" type="button" aria-label="${item.name}님 리뷰 상세보기" data-review-detail>더보기</button>
       </article>
     `;
     })
     .join("");
+
+  const reviewSection = reviewCardList.closest(".review-section");
+  if (reviewSection?.classList.contains("is-visible")) {
+    window.requestAnimationFrame(() => {
+      reviewCardList.querySelectorAll(".review-card").forEach((card, index) => {
+        card.style.setProperty("--review-card-delay", `${index < 5 ? index * 50 : 0}ms`);
+        card.classList.add("is-visible");
+      });
+    });
+  }
+}
+
+function initReviewFilters() {
+  const filterButtons = [...document.querySelectorAll("[data-review-filter]")];
+  if (!filterButtons.length) return;
+
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const selectedFilter = button.dataset.reviewFilter;
+
+      filterButtons.forEach((filterButton) => {
+        const isActive = filterButton === button;
+        filterButton.classList.toggle("is-active", isActive);
+        filterButton.setAttribute("aria-selected", String(isActive));
+      });
+
+      renderReviewCards(selectedFilter);
+    });
+  });
 }
 
 function initEventSingleSwiper() {
@@ -487,6 +695,7 @@ function initFloatingActions() {
   const chatButton = document.querySelector("#floatingChat");
   const consultPanel = document.querySelector("#floatingConsultPanel");
   const reviewButton = document.querySelector("#floatingReview");
+  const footerChatButton = document.querySelector(".footer-contact-button.chat");
   const chatBody = consultPanel?.querySelector("[data-chat-body]");
   const chatForm = consultPanel?.querySelector("[data-chat-form]");
   const chatInput = chatForm?.querySelector("input");
@@ -532,6 +741,10 @@ function initFloatingActions() {
   chatButton?.addEventListener("click", () => {
     const isOpen = consultPanel?.classList.contains("is-open");
     setConsultPanelOpen(!isOpen);
+  });
+
+  footerChatButton?.addEventListener("click", () => {
+    setConsultPanelOpen(true);
   });
 
   consultPanel?.addEventListener("click", (event) => {
@@ -593,6 +806,7 @@ function initFloatingActions() {
 function initReviewCardMotion() {
   const reviewCardList = document.querySelector(".review-card-list");
   if (!reviewCardList) return;
+  if (document.body.classList.contains("review-list-page")) return;
 
   const reviewCards = [...reviewCardList.querySelectorAll(".review-card")];
   if (!reviewCards.length) return;
@@ -623,9 +837,44 @@ function initReviewCardMotion() {
   });
 }
 
+function initReviewSectionMotion() {
+  const reviewSection = document.querySelector(".review-list-page .review-section");
+  if (!reviewSection) return;
+
+  function revealSection() {
+    reviewSection.classList.add("is-visible");
+
+    window.requestAnimationFrame(() => {
+      reviewSection.querySelectorAll(".review-card").forEach((card, index) => {
+        card.style.setProperty("--review-card-delay", `${180 + (index < 5 ? index * 50 : 0)}ms`);
+        card.classList.add("is-visible");
+      });
+    });
+  }
+
+  if (!("IntersectionObserver" in window)) {
+    revealSection();
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      revealSection();
+      observer.unobserve(reviewSection);
+    });
+  }, {
+    rootMargin: "0px",
+    threshold: 0.02,
+  });
+
+  observer.observe(reviewSection);
+}
+
 function bindReviewInteractions() {
   const reviewMoreModal = document.querySelector("[data-review-more-modal]");
   const reviewMoreCloseButtons = document.querySelectorAll("[data-review-more-close]");
+  const reviewCardList = document.querySelector(".review-card-list");
 
   function setReviewMoreModalOpen(isOpen) {
     if (!reviewMoreModal) return;
@@ -633,10 +882,10 @@ function bindReviewInteractions() {
     reviewMoreModal.setAttribute("aria-hidden", String(!isOpen));
   }
 
-  document.querySelectorAll("[data-review-detail]").forEach((button) => {
-    button.addEventListener("click", () => {
+  reviewCardList?.addEventListener("click", (event) => {
+    if (event.target.closest("[data-review-detail]")) {
       showToast("리뷰 상세 페이지로 이동할 예정입니다.");
-    });
+    }
   });
 
   document.querySelector("[data-review-write]")?.addEventListener("click", () => {
@@ -726,11 +975,14 @@ function bindInteractions() {
 renderGallery();
 initRecommendMotion();
 initHeroRecommendTransition();
+initReviewHeroTransition();
 renderTopsCards();
 initAboutMotion();
 initBenefitMotion();
 renderSteps();
 renderReviewCards();
+initReviewFilters();
+initReviewSectionMotion();
 initEventSingleSwiper();
 initFloatingActions();
 initReviewCardMotion();

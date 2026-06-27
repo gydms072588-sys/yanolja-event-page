@@ -10,6 +10,7 @@
 <body class="review-page review-list-page">
   <a class="skip-link" href="#review-main">본문 바로가기</a>
 
+  <div class="review-hero-transition">
   <header class="review-hero">
     <video class="review-hero-video" autoplay muted loop playsinline>
       <source src="./assets/video/review/review-hero.mp4" type="video/mp4">
@@ -25,24 +26,40 @@
       <p>실제 여행자가 남긴 이야기로 나에게 맞는 숙소를 찾아보세요</p>
     </div>
     <aside class="quick-menu" aria-label="빠른 이동 메뉴">
-      <a class="quick-link" href="./index.html#section-recommend">TOPs 펜션</a>
       <a class="quick-link" href="./index.html#section-how">이벤트 참여</a>
+      <a class="quick-link" href="./index.html#section-recommend">TOPs 펜션</a>
       <a class="quick-link" href="./index.html#section-schedule">당첨확인</a>
     </aside>
   </header>
 
+  <div class="review-content-panel">
   <main id="review-main" class="review-main">
     <section class="review-section" aria-labelledby="review-list-title">
       <div class="review-container">
-        <h2 id="review-list-title">REAL REVIEW</h2>
+        <header class="review-section-heading">
+          <p>다녀온 사람들이 먼저 알아본 숙소</p>
+          <h2 id="review-list-title"><span>BEST</span><span>REAL REVIEW</span></h2>
+        </header>
+        <div class="review-filter-tabs" role="tablist" aria-label="리뷰 필터">
+          <button type="button" role="tab" aria-selected="false" data-review-filter="all">전체</button>
+          <button class="is-active" type="button" role="tab" aria-selected="true" data-review-filter="tops">TOPS펜션</button>
+          <button type="button" role="tab" aria-selected="false" data-review-filter="couple">커플여행</button>
+          <button type="button" role="tab" aria-selected="false" data-review-filter="family">가족여행</button>
+          <button type="button" role="tab" aria-selected="false" data-review-filter="friends">친구여행</button>
+          <button type="button" role="tab" aria-selected="false" data-review-filter="ocean">오션뷰</button>
+          <button type="button" role="tab" aria-selected="false" data-review-filter="hanok">한옥스테이</button>
+          <button type="button" role="tab" aria-selected="false" data-review-filter="hotel">호캉스</button>
+        </div>
         <div class="review-card-list" data-review-list></div>
 
         <div class="review-bottom-cta">
-          <button class="review-action-button review-action-button--secondary" type="button" data-review-more>Load More</button>
+          <button class="review-action-button review-action-button--secondary" type="button" data-review-more>리뷰 전체보기</button>
         </div>
       </div>
     </section>
   </main>
+  </div>
+  </div>
 
   <div class="floating-actions" aria-label="빠른 상담 및 리뷰 작성">
     <div class="floating-action-wrap">
