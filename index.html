@@ -13,6 +13,7 @@
   <a class="skip-link" href="#main">본문 바로가기</a>
 
   <main id="main">
+    <div class="hero-recommend-transition">
     <section id="hero" class="hero" aria-labelledby="hero-title">
       <div class="hero-swiper swiper" aria-label="히어로 영상 슬라이드">
         <div class="swiper-wrapper">
@@ -42,13 +43,17 @@
       </aside>
     </section>
 
+    <div class="hero-recommend-panel">
     <section id="section-recommend" class="section section-recommend" aria-labelledby="recommend-title">
       <div class="container">
         <div class="recommend-heading-wrap">
           <span class="plane-trail" aria-hidden="true"></span>
           <span class="plane-motion" aria-hidden="true"></span>
           <p class="section-kicker">여행 스타일에 맞는 펜션을 골라보세요</p>
-          <h2 id="recommend-title">트립 홀릭 추천!<br>TOPS 펜션</h2>
+          <h2 id="recommend-title">
+            <span class="recommend-title-line">트립 홀릭 추천!</span>
+            <span class="recommend-title-line">TOPS 펜션</span>
+          </h2>
         </div>
         <div class="recommend-layout">
           <article class="featured-card">
@@ -63,7 +68,10 @@
               <span>가평군 북면</span>
             </div>
           </article>
-          <div class="gallery-grid" id="galleryGrid" aria-label="추천 펜션 목록"></div>
+          <div class="recommend-secondary">
+            <a class="recommend-more" href="./review.html">펜션 더보기</a>
+            <div class="gallery-grid" id="galleryGrid" aria-label="추천 펜션 목록"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -79,6 +87,8 @@
         <div class="tops-list" id="topsList" aria-label="TOPS 인증 펜션 이미지"></div>
       </div>
     </section>
+    </div>
+    </div>
 
     <section id="section-how" class="section section-how" aria-labelledby="how-title">
       <div class="container">

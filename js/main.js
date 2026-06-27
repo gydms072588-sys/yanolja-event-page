@@ -244,6 +244,73 @@ function initRecommendMotion() {
   observer.observe(recommendSection);
 }
 
+function initHeroRecommendTransition() {
+  const hero = document.querySelector("#hero");
+  const transitionPanel = document.querySelector(".hero-recommend-panel");
+  if (!hero || !transitionPanel) return;
+
+  let frameId = 0;
+  let currentStrength = 0;
+  let targetStrength = 0;
+
+  function applyTransitionStrength(strength) {
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    const blur = strength * (isMobile ? 10 : 16);
+    const panelOpacity = 1 - strength * (isMobile ? 0.52 : 0.45);
+    const panelRadius = strength * (isMobile ? 24 : 34);
+    const shadowOpacity = strength * (isMobile ? 0.08 : 0.12);
+
+    transitionPanel.style.setProperty("--hero-transition-progress", strength.toFixed(4));
+    transitionPanel.style.setProperty("--hero-transition-blur", `${blur.toFixed(2)}px`);
+    transitionPanel.style.setProperty("--hero-panel-opacity", panelOpacity.toFixed(4));
+    transitionPanel.style.setProperty("--hero-panel-radius", `${panelRadius.toFixed(2)}px`);
+    transitionPanel.style.setProperty("--hero-panel-shadow", shadowOpacity.toFixed(4));
+  }
+
+  function getTransitionStrength() {
+    const rect = transitionPanel.getBoundingClientRect();
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    const transitionStart = viewportHeight * 0.96;
+    const transitionEnd = viewportHeight * (isMobile ? 0.28 : 0.12);
+    const strength = (rect.top - transitionEnd) / (transitionStart - transitionEnd);
+
+    return Math.min(1, Math.max(0, strength));
+  }
+
+  function updateTransition() {
+    targetStrength = getTransitionStrength();
+    currentStrength += (targetStrength - currentStrength) * 0.2;
+
+    if (Math.abs(targetStrength - currentStrength) < 0.001) {
+      currentStrength = targetStrength;
+    }
+
+    applyTransitionStrength(currentStrength);
+
+    if (currentStrength !== targetStrength) {
+      frameId = window.requestAnimationFrame(updateTransition);
+      return;
+    }
+
+    frameId = 0;
+  }
+
+  function requestTransitionUpdate() {
+    targetStrength = getTransitionStrength();
+    if (!frameId) {
+      frameId = window.requestAnimationFrame(updateTransition);
+    }
+  }
+
+  currentStrength = getTransitionStrength();
+  targetStrength = currentStrength;
+  applyTransitionStrength(currentStrength);
+
+  window.addEventListener("scroll", requestTransitionUpdate, { passive: true });
+  window.addEventListener("resize", requestTransitionUpdate, { passive: true });
+}
+
 function renderTopsCards() {
   const topsList = document.querySelector("#topsList");
   if (!topsList) return;
@@ -658,6 +725,7 @@ function bindInteractions() {
 
 renderGallery();
 initRecommendMotion();
+initHeroRecommendTransition();
 renderTopsCards();
 initAboutMotion();
 initBenefitMotion();
