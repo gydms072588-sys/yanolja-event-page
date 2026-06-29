@@ -6,6 +6,9 @@
   <meta name="description" content="트립 홀릭 TOPS 펜션 추천 이벤트 페이지">
   <title>TRIP HOLIC TOPS 펜션 이벤트</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&amp;icon_names=chat_bubble,stylus_note&amp;display=block" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link rel="stylesheet" href="./css/style.css">
 </head>
@@ -15,6 +18,11 @@
   <main id="main">
     <div class="hero-recommend-transition" data-snap-transition>
     <section id="hero" class="hero" aria-labelledby="hero-title" data-snap-section>
+      <header class="hero-header">
+        <button class="hero-brand" type="button" data-logo-action aria-label="여기어때 홈 안내">
+          <img src="./assets/images/yeogi-logo-white.png" alt="여기어때">
+        </button>
+      </header>
       <div class="hero-swiper swiper" aria-label="히어로 영상 슬라이드">
         <div class="swiper-wrapper">
           <article class="swiper-slide hero-slide">
@@ -23,24 +31,18 @@
             </video>
             <div class="hero-overlay"></div>
             <div class="hero-copy">
-              <h1 id="hero-title">좋은 여행은<br>좋은 숙소를 고르는 순간부터</h1>
+              <span class="hero-eyebrow">트립홀릭 추천!</span>
+              <h1 id="hero-title">TOPS 펜션 <span class="hero-title-break">리뷰 이벤트</span></h1>
               <p>야놀자가 추천하는 우수 펜션과 함께<br>지역 소상공인의 새로운 여행 경험을 응원합니다</p>
             </div>
           </article>
         </div>
-        <div class="hero-progress" aria-hidden="true">
-          <span class="progress-label">TRIP HOLIC</span>
-          <div class="progress-track">
-            <span class="progress-fill"></span>
-          </div>
-          <a class="progress-label" href="./review.html">REAL REVIEW</a>
-        </div>
       </div>
-      <aside class="quick-menu" aria-label="빠른 이동 메뉴">
-        <button type="button" data-target="#section-recommend">TOPs 펜션</button>
+      <nav class="quick-menu hero-cta-group" aria-label="이벤트 빠른 이동">
+        <button type="button" data-target="#section-recommend">TOPS 펜션</button>
         <button type="button" data-target="#section-how">이벤트 참여</button>
         <button type="button" data-check-trigger>당첨확인</button>
-      </aside>
+      </nav>
       <button
         class="hero-scroll-guide"
         type="button"
@@ -59,8 +61,8 @@
     <section id="section-recommend" class="section section-recommend" aria-labelledby="recommend-title">
       <div class="container">
         <div class="recommend-heading-wrap">
-          <span class="plane-trail" aria-hidden="true"></span>
-          <span class="plane-motion" aria-hidden="true"></span>
+          <img class="recommend-sticker recommend-sticker--suitcase" src="./assets/images/stickers/suitcase.png" alt="" aria-hidden="true">
+          <img class="recommend-sticker recommend-sticker--car" src="./assets/images/stickers/travel-car.png" alt="" aria-hidden="true">
           <p class="section-kicker">여행 스타일에 맞는 펜션을 골라보세요</p>
           <h2 id="recommend-title">
             <span class="recommend-title-line">트립 홀릭 추천!</span>
@@ -73,7 +75,6 @@
             <button class="card-hover featured-hover" type="button" aria-label="숲결 스테이 더보기" data-place="숲결 스테이">
               <strong>더보기</strong>
               <span>#숲속펜션 #감성숙소 #가평</span>
-              <em>숲에 둘러싸인 독채 공간에서<br>하루 종일 조용히 쉬고 싶은 분께<br>추천하는 프라이빗 힐링 스테이</em>
             </button>
             <div class="card-copy">
               <strong>숲결 스테이</strong>
@@ -81,7 +82,7 @@
             </div>
           </article>
           <div class="recommend-secondary">
-            <a class="recommend-more" href="./review.html">펜션 더보기</a>
+            <button class="recommend-more" type="button" data-booking-more>펜션 더보기</button>
             <div class="gallery-grid" id="galleryGrid" aria-label="추천 펜션 목록"></div>
           </div>
         </div>
@@ -96,7 +97,9 @@
           <h2 id="about-title">TOPS 펜션이란?</h2>
           <p>중소벤처기업부와 여기어때<br>우수 소상공인을<br>지원하기위해 선정된 대표 숙소입니다</p>
         </div>
-        <div class="tops-list" id="topsList" aria-label="TOPS 인증 펜션 이미지"></div>
+        <div class="tops-visual">
+          <div class="tops-list" id="topsList" aria-label="TOPS 인증 펜션 이미지"></div>
+        </div>
       </div>
     </section>
     </div>
@@ -107,6 +110,8 @@
         <p class="section-kicker section-title" id="how-title">이벤트 참여방법</p>
         <h2 class="section-description">TOPS 펜션에 방문하여<br>야놀자 스팟이 잘 드러나게 인증샷을 남겨주세요</h2>
         <figure class="event-photo">
+          <img class="event-sticker event-sticker--camera" src="./assets/images/stickers/camera.png" alt="" aria-hidden="true">
+          <img class="event-sticker event-sticker--map" src="./assets/images/stickers/map.png" alt="" aria-hidden="true">
           <div class="event-swiper swiper" aria-label="이벤트 참여 예시 이미지 슬라이드">
             <div class="swiper-wrapper">
               <article class="swiper-slide event-slide">
@@ -174,7 +179,7 @@
   <div class="floating-actions" aria-label="빠른 상담 및 리뷰 작성">
     <div class="floating-action-wrap">
       <button id="floatingChat" class="floating-action-button" type="button" aria-label="고객상담 열기" aria-expanded="false" aria-controls="floatingConsultPanel">
-        <img src="./assets/images/floating/icon-floating-review.png" alt="" aria-hidden="true">
+        <span class="material-symbols-outlined floating-action-icon" aria-hidden="true">chat_bubble</span>
         <span class="floating-action-tooltip" role="tooltip">고객상담</span>
       </button>
       <div id="floatingConsultPanel" class="floating-consult-panel floating-chat chat-window" role="dialog" aria-modal="false" aria-labelledby="floatingChatTitle" aria-hidden="true">
@@ -209,7 +214,7 @@
     </div>
     <div class="floating-action-wrap">
       <button id="floatingReview" class="floating-action-button" type="button" aria-label="리뷰 참여하기">
-        <img src="./assets/images/floating/icon-floating-chat.png" alt="" aria-hidden="true">
+        <span class="material-symbols-outlined floating-action-icon" aria-hidden="true">stylus_note</span>
         <span class="floating-action-tooltip" role="tooltip">리뷰 참여하기</span>
       </button>
     </div>
@@ -226,12 +231,36 @@
           <button class="footer-contact-button chat" type="button">채팅 상담</button>
         </div>
       </div>
+      <div class="footer-social" aria-label="여기어때 소셜 채널">
+        <a href="#" aria-label="여기어때 유튜브" data-footer-placeholder>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.58 7.19a2.8 2.8 0 0 0-1.97-1.98C17.87 4.75 12 4.75 12 4.75s-5.87 0-7.61.46A2.8 2.8 0 0 0 2.42 7.2 29.3 29.3 0 0 0 2 12a29.3 29.3 0 0 0 .42 4.81 2.8 2.8 0 0 0 1.97 1.98c1.74.46 7.61.46 7.61.46s5.87 0 7.61-.46a2.8 2.8 0 0 0 1.97-1.98A29.3 29.3 0 0 0 22 12a29.3 29.3 0 0 0-.42-4.81ZM10 15.2V8.8l5.2 3.2L10 15.2Z"/></svg>
+        </a>
+        <a href="#" aria-label="여기어때 인스타그램" data-footer-placeholder>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 2h9.6A5.2 5.2 0 0 1 22 7.2v9.6a5.2 5.2 0 0 1-5.2 5.2H7.2A5.2 5.2 0 0 1 2 16.8V7.2A5.2 5.2 0 0 1 7.2 2Zm0 1.8a3.4 3.4 0 0 0-3.4 3.4v9.6a3.4 3.4 0 0 0 3.4 3.4h9.6a3.4 3.4 0 0 0 3.4-3.4V7.2a3.4 3.4 0 0 0-3.4-3.4H7.2Zm10.15 1.35a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 6.85A5.15 5.15 0 1 1 6.85 12 5.15 5.15 0 0 1 12 6.85Zm0 1.8A3.35 3.35 0 1 0 15.35 12 3.35 3.35 0 0 0 12 8.65Z"/></svg>
+        </a>
+      </div>
       <p class="notice">본 이벤트는 내부 사정에 따라 변경될 수 있으며, 자세한 내용은 이벤트 유의사항을 확인해주세요.</p>
-      <p class="copyright">Copyright © COMPANY Corp. All rights reserved.</p>
+      <div class="footer-company">
+        <strong>(주)여기어때컴퍼니</strong>
+        <p>주소: 서울특별시 강남구 봉은사로 479, 479타워 11층 | 대표이사: 정명훈</p>
+        <p>사업자등록번호: 742-86-00224 | 통신판매번호: 2017-서울강남-01779 | 전자우편주소: help@yeogi.com</p>
+        <p>호스팅서비스제공자의 상호 표시: (주)여기어때컴퍼니</p>
+        <p>개별 판매자가 판매하는 상품의 예약, 이용 및 환불 등과 관련한 의무와 책임은 각 판매자에게 있습니다.</p>
+      </div>
+      <p class="copyright">Copyright GC COMPANY Corp. All rights reserved.</p>
     </div>
   </footer>
 
   <div class="toast" role="status" aria-live="polite"></div>
+  <div class="review-more-modal review-write-modal" aria-hidden="true" data-review-write-modal>
+    <div class="review-more-modal__backdrop" data-review-write-close></div>
+    <div class="review-more-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="review-write-modal-title">
+      <button class="review-more-modal__close" type="button" aria-label="닫기" data-review-write-close>×</button>
+      <strong id="review-write-modal-title">리뷰 참여 안내</strong>
+      <p>리뷰 작성 페이지로 이동합니다.</p>
+      <button class="review-more-modal__confirm" type="button" data-review-write-close>확인</button>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="./js/main.js"></script>

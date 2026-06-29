@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="트립 홀릭 TOPS 펜션 리얼 리뷰">
   <title>REAL REVIEW | TRIP HOLIC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&amp;icon_names=chat_bubble,stylus_note&amp;display=block" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
 </head>
 <body class="review-page review-list-page">
@@ -12,6 +15,11 @@
 
   <div class="review-hero-transition" data-snap-transition>
   <header class="review-hero" data-snap-section>
+    <div class="hero-header">
+      <button class="hero-brand" type="button" data-logo-action aria-label="여기어때 홈 안내">
+        <img src="./assets/images/yeogi-logo-white.png" alt="여기어때">
+      </button>
+    </div>
     <video class="review-hero-video" autoplay muted loop playsinline>
       <source src="./assets/video/review/review-hero.mp4" type="video/mp4">
     </video>
@@ -22,14 +30,15 @@
       <span class="progress-label is-active">REAL REVIEW</span>
     </nav>
     <div class="review-hero-copy">
-      <h1>다녀간 사람들의<br>발자취를 따라 숙소를 골라보세요</h1>
-      <p>실제 여행자가 남긴 이야기로 나에게 맞는 숙소를 찾아보세요</p>
+      <span class="hero-eyebrow">실제 여행자의 리뷰로</span>
+      <h1>나를 위한 펜션을 <span class="review-title-break">찾아보세요</span></h1>
+      <p>포토 리뷰를 확인하고<br>취향에 맞는 TOPS 펜션을 골라보세요</p>
     </div>
-    <aside class="quick-menu" aria-label="빠른 이동 메뉴">
+    <nav class="quick-menu hero-cta-group" aria-label="이벤트 빠른 이동">
+      <a class="quick-link" href="./index.html#section-recommend">TOPS 펜션</a>
       <a class="quick-link" href="./index.html#section-how">이벤트 참여</a>
-      <a class="quick-link" href="./index.html#section-recommend">TOPs 펜션</a>
-      <a class="quick-link" href="./index.html#section-schedule">당첨확인</a>
-    </aside>
+      <button type="button" data-check-trigger>당첨확인</button>
+    </nav>
     <button
       class="hero-scroll-guide"
       type="button"
@@ -57,15 +66,13 @@
           <button class="is-active" type="button" role="tab" aria-selected="true" data-review-filter="tops">TOPS펜션</button>
           <button type="button" role="tab" aria-selected="false" data-review-filter="couple">커플여행</button>
           <button type="button" role="tab" aria-selected="false" data-review-filter="family">가족여행</button>
-          <button type="button" role="tab" aria-selected="false" data-review-filter="friends">친구여행</button>
           <button type="button" role="tab" aria-selected="false" data-review-filter="ocean">오션뷰</button>
           <button type="button" role="tab" aria-selected="false" data-review-filter="hanok">한옥스테이</button>
-          <button type="button" role="tab" aria-selected="false" data-review-filter="hotel">호캉스</button>
         </div>
         <div class="review-card-list" data-review-list></div>
 
         <div class="review-bottom-cta">
-          <button class="review-action-button review-action-button--secondary" type="button" data-review-more>리뷰 전체보기</button>
+          <button class="review-action-button review-action-button--secondary" type="button" data-review-write>리뷰 참여하기</button>
         </div>
       </div>
     </section>
@@ -76,7 +83,7 @@
   <div class="floating-actions" aria-label="빠른 상담 및 리뷰 작성">
     <div class="floating-action-wrap">
       <button id="floatingChat" class="floating-action-button" type="button" aria-label="고객상담 열기" aria-expanded="false" aria-controls="floatingConsultPanel">
-        <img src="./assets/images/floating/icon-floating-review.png" alt="" aria-hidden="true">
+        <span class="material-symbols-outlined floating-action-icon" aria-hidden="true">chat_bubble</span>
         <span class="floating-action-tooltip" role="tooltip">고객상담</span>
       </button>
       <div id="floatingConsultPanel" class="floating-consult-panel floating-chat chat-window" role="dialog" aria-modal="false" aria-labelledby="floatingChatTitle" aria-hidden="true">
@@ -111,7 +118,7 @@
     </div>
     <div class="floating-action-wrap">
       <button id="floatingReview" class="floating-action-button" type="button" aria-label="리뷰 참여하기">
-        <img src="./assets/images/floating/icon-floating-chat.png" alt="" aria-hidden="true">
+        <span class="material-symbols-outlined floating-action-icon" aria-hidden="true">stylus_note</span>
         <span class="floating-action-tooltip" role="tooltip">리뷰 참여하기</span>
       </button>
     </div>
@@ -128,22 +135,36 @@
           <button class="footer-contact-button chat" type="button">채팅 상담</button>
         </div>
       </div>
+      <div class="footer-social" aria-label="여기어때 소셜 채널">
+        <a href="#" aria-label="여기어때 유튜브" data-footer-placeholder>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.58 7.19a2.8 2.8 0 0 0-1.97-1.98C17.87 4.75 12 4.75 12 4.75s-5.87 0-7.61.46A2.8 2.8 0 0 0 2.42 7.2 29.3 29.3 0 0 0 2 12a29.3 29.3 0 0 0 .42 4.81 2.8 2.8 0 0 0 1.97 1.98c1.74.46 7.61.46 7.61.46s5.87 0 7.61-.46a2.8 2.8 0 0 0 1.97-1.98A29.3 29.3 0 0 0 22 12a29.3 29.3 0 0 0-.42-4.81ZM10 15.2V8.8l5.2 3.2L10 15.2Z"/></svg>
+        </a>
+        <a href="#" aria-label="여기어때 인스타그램" data-footer-placeholder>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 2h9.6A5.2 5.2 0 0 1 22 7.2v9.6a5.2 5.2 0 0 1-5.2 5.2H7.2A5.2 5.2 0 0 1 2 16.8V7.2A5.2 5.2 0 0 1 7.2 2Zm0 1.8a3.4 3.4 0 0 0-3.4 3.4v9.6a3.4 3.4 0 0 0 3.4 3.4h9.6a3.4 3.4 0 0 0 3.4-3.4V7.2a3.4 3.4 0 0 0-3.4-3.4H7.2Zm10.15 1.35a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 6.85A5.15 5.15 0 1 1 6.85 12 5.15 5.15 0 0 1 12 6.85Zm0 1.8A3.35 3.35 0 1 0 15.35 12 3.35 3.35 0 0 0 12 8.65Z"/></svg>
+        </a>
+      </div>
       <p class="notice">본 이벤트는 내부 사정에 따라 변경될 수 있으며, 자세한 내용은 이벤트 유의사항을 확인해주세요.</p>
-      <p class="copyright">Copyright © COMPANY Corp. All rights reserved.</p>
+      <div class="footer-company">
+        <strong>(주)여기어때컴퍼니</strong>
+        <p>주소: 서울특별시 강남구 봉은사로 479, 479타워 11층 | 대표이사: 정명훈</p>
+        <p>사업자등록번호: 742-86-00224 | 통신판매번호: 2017-서울강남-01779 | 전자우편주소: help@yeogi.com</p>
+        <p>호스팅서비스제공자의 상호 표시: (주)여기어때컴퍼니</p>
+        <p>개별 판매자가 판매하는 상품의 예약, 이용 및 환불 등과 관련한 의무와 책임은 각 판매자에게 있습니다.</p>
+      </div>
+      <p class="copyright">Copyright GC COMPANY Corp. All rights reserved.</p>
     </div>
   </footer>
 
   <div class="toast" role="status" aria-live="polite"></div>
-  <div class="review-more-modal" aria-hidden="true" data-review-more-modal>
-    <div class="review-more-modal__backdrop" data-review-more-close></div>
-    <div class="review-more-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="review-more-modal-title">
-      <button class="review-more-modal__close" type="button" aria-label="닫기" data-review-more-close>×</button>
-      <strong id="review-more-modal-title">안내</strong>
-      <p>리뷰 모음 페이지로 이동할 예정입니다.</p>
-      <button class="review-more-modal__confirm" type="button" data-review-more-close>확인</button>
+  <div class="review-more-modal review-write-modal" aria-hidden="true" data-review-write-modal>
+    <div class="review-more-modal__backdrop" data-review-write-close></div>
+    <div class="review-more-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="review-write-modal-title">
+      <button class="review-more-modal__close" type="button" aria-label="닫기" data-review-write-close>×</button>
+      <strong id="review-write-modal-title">리뷰 참여 안내</strong>
+      <p>리뷰 작성 페이지로 이동합니다.</p>
+      <button class="review-more-modal__confirm" type="button" data-review-write-close>확인</button>
     </div>
   </div>
-
   <script src="./js/main.js"></script>
   <script>
     (() => {
