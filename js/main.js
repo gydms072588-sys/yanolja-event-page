@@ -4,28 +4,24 @@ const galleryItems = [
     name: "씨브리즈 하우스",
     location: "강릉시 사천면",
     tags: "#오션뷰 #커플여행 #강릉",
-    description: "바다 앞 감성 오션뷰",
   },
   {
     image: "gallery-card_2 image.png",
     name: "담온재",
     location: "경주시 교동",
     tags: "#한옥스테이 #전통감성 #경주",
-    description: "고즈넉한 한옥 스테이",
   },
   {
     image: "gallery-card_3_image.png",
     name: "라온가든 펜션",
     location: "양평군 서종면",
     tags: "#정원뷰 #가족모임 #양평",
-    description: "가족과 쉬기 좋은 정원",
   },
   {
     image: "gallery-card_4_image.png",
     name: "포레스트 테라스",
     location: "홍천군 서면",
     tags: "#숲캉스 #바비큐 #홍천",
-    description: "숲과 바비큐를 함께",
   },
 ];
 
@@ -458,13 +454,64 @@ function renderTopsCards() {
   const topsList = document.querySelector("#topsList");
   if (!topsList) return;
 
-  topsList.innerHTML = topsItems
+  const cards = topsItems
     .map((item) => `
-      <article class="tops-card">
+      <article class="tops-card" role="group" aria-label="${topsItems.indexOf(item) + 1} / ${topsItems.length}">
         <img src="${imagePath}${item.image}" alt="${item.alt}">
       </article>
     `)
-    .join("") + `<p class="tops-note">TOPS 인증마크를 확인하세요!</p>`;
+    .join("");
+
+  const pagination = topsItems
+    .map((_, index) => `
+      <button class="tops-pagination-dot${index === 0 ? " is-active" : ""}" type="button" data-tops-slide="${index}" aria-label="${index + 1}번째 TOPS 펜션 보기" aria-current="${index === 0 ? "true" : "false"}"></button>
+    `)
+    .join("");
+
+  topsList.innerHTML = `
+    <div class="tops-track" role="region" aria-label="TOPS 인증 펜션 슬라이드" tabindex="0">${cards}</div>
+    <div class="tops-pagination" aria-label="TOPS 펜션 슬라이드 페이지">${pagination}</div>
+    <p class="tops-note">TOPS 인증마크를 확인하세요!</p>
+  `;
+}
+
+function initTopsSlider() {
+  const track = document.querySelector(".tops-track");
+  const cards = [...document.querySelectorAll(".tops-track .tops-card")];
+  const dots = [...document.querySelectorAll("[data-tops-slide]")];
+  if (!track || !cards.length || !dots.length) return;
+
+  function setActiveSlide(index) {
+    dots.forEach((dot, dotIndex) => {
+      const isActive = dotIndex === index;
+      dot.classList.toggle("is-active", isActive);
+      dot.setAttribute("aria-current", String(isActive));
+    });
+  }
+
+  function updateActiveSlide() {
+    const trackCenter = track.getBoundingClientRect().left + track.clientWidth / 2;
+    const closestIndex = cards.reduce((closest, card, index) => {
+      const rect = card.getBoundingClientRect();
+      const distance = Math.abs(rect.left + rect.width / 2 - trackCenter);
+      return distance < closest.distance ? { index, distance } : closest;
+    }, { index: 0, distance: Infinity }).index;
+
+    setActiveSlide(closestIndex);
+  }
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      cards[index]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      setActiveSlide(index);
+    });
+  });
+
+  let scrollFrame;
+  track.addEventListener("scroll", () => {
+    window.cancelAnimationFrame(scrollFrame);
+    scrollFrame = window.requestAnimationFrame(updateActiveSlide);
+  }, { passive: true });
 }
 
 function initAboutMotion() {
@@ -1134,6 +1181,7 @@ initRecommendMotion();
 initScrollSnapTransitions();
 initHeroScrollGuides();
 renderTopsCards();
+initTopsSlider();
 initAboutMotion();
 initEventStickerMotion();
 initBenefitMotion();
