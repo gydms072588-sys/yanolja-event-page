@@ -4953,20 +4953,26 @@ main,
   word-break: keep-all;
 }
 
+/* Final benefit character sizing and placement.
+   Keep these after the earlier responsive revisions so they remain authoritative. */
 .walk-left {
-  width: clamp(108px, 10vw, 128px);
+  left: clamp(0px, calc(50% - 520px), 76px);
+  width: clamp(82px, 7vw, 104px);
 }
 
 .walk-left.second {
-  width: clamp(124px, 11vw, 146px);
+  left: clamp(82px, calc(50% - 420px), 132px);
+  width: clamp(92px, 8vw, 116px);
 }
 
 .walk-right {
-  width: clamp(126px, 11vw, 148px);
+  right: clamp(82px, calc(50% - 420px), 132px);
+  width: clamp(96px, 8vw, 120px);
 }
 
 .walk-right.solo {
-  width: clamp(164px, 15vw, 190px);
+  right: clamp(0px, calc(50% - 520px), 76px);
+  width: clamp(124px, 11vw, 150px);
 }
 
 .review-list-page .review-section {
@@ -5113,6 +5119,25 @@ main,
 .site-footer .copyright {
   margin-top: 22px;
   font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .walk-left:not(.second) {
+    bottom: 14px;
+    left: 14px;
+    width: clamp(60px, 8vw, 72px);
+  }
+
+  .walk-right:not(.solo) {
+    right: 14px;
+    bottom: 14px;
+    width: clamp(66px, 9vw, 82px);
+  }
+
+  .walk-left.second,
+  .walk-right.solo {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
@@ -5286,9 +5311,9 @@ main,
     text-align: center;
   }
 
-  .walk-left:not(.second),
-  .walk-right:not(.solo) {
-    width: clamp(82px, 24vw, 110px);
+  .walk-left,
+  .walk-right {
+    display: none;
   }
 
   .review-list-page .review-section {
