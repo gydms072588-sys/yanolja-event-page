@@ -43,17 +43,17 @@ const topsItems = [
 const stepItems = [
   {
     image: "Section3_card1.png",
-    title: "TOPS 펜션에 방문하여<br>인증샷 촬영하기",
+    title: '<span class="step-accent">TOPS 펜션</span>에<br>방문 하기',
     text: "",
   },
   {
     image: "Section3_card2.png",
-    title: "야놀자 스팟에서<br>인증샷 촬영하기",
+    title: '야놀자 스팟에서<br><span class="step-accent">인증샷 촬영</span> 하기',
     text: "",
   },
   {
     image: "Section3_card3.png",
-    title: "이벤트 페이지에<br>리뷰와 함께 인증샷 업로드하기",
+    title: '이벤트 페이지에<br><span class="step-accent">리뷰업로드</span> 하기',
     text: "",
   },
 ];
